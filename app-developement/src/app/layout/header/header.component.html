@@ -1,0 +1,41 @@
+<div class="container">
+  <!-- main clock -->
+  <div class="clock item">{{currentTime}}</div>
+  
+  <!-- individual applets' references -->
+  <div class="appletReference item"
+    *ngFor="let applet of currentApplets; trackBy:trackByFunction"
+    appOnClickFocus
+    appContextMenu
+    [appletId]="applet.id"
+    [submenuComponent]="appletDeletionMenu"
+  >
+    <div class="appletReference__icon"
+      [ngClass]="{'graph': applet.appletType==='graph',
+                  'imagery': applet.appletType==='imagery',
+                  'table': applet.appletType==='table',
+                  'commander': applet.appletType==='commander'}"       
+    ></div>
+    <span *ngIf="applet.telemetrySources[0]" 
+      class="appletReference__text">{{applet.telemetrySources[0]}}</span>
+    <!-- submenu is out of document flow -->
+    <app-sub-menu #appletDeletionMenu
+      [appletId]="applet.id"
+      [appletDeletionOption]='true'
+    ></app-sub-menu>
+  </div>
+  
+  <!-- add applet button -->
+  <div class="addApplet item"
+    [appDropMenu]="appletCreationMenu"
+  >   
+    <div class="flexContainer">
+      <div class="addApplet__icon"></div> 
+      <div class="addApplet__name">add applet</div>
+    </div>
+    
+    <app-sub-menu #appletCreationMenu
+      [appletCreationOption]='true'   
+    ></app-sub-menu> 
+  </div>
+</div>

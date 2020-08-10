@@ -1,0 +1,24 @@
+@import './shared/shared.scss';
+
+* {
+  user-select:none;
+}
+
+html {
+  font-family: Sans;
+  font-size: 12px; //delegates to all components, they can relatively style to this using rem
+  font-weight: 400; 
+}
+
+button {
+  cursor: pointer;
+  -webkit-appearance: none;
+  border: none;
+  outline: none;
+  padding: 0px;
+}
+
+app-layout {
+  width: 100%;
+  height: 100%;
+}

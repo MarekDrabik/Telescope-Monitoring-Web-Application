@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Battery Current",
+        "type": "point",
+        "unit": "mA"
+    },
+    {
+        "name": "Engine Current",
+        "type": "point",
+        "unit": "mA"
+    },
+    {
+        "name": "Outside Temperature",
+        "type": "point",
+        "unit": "C"
+    },
+    {
+        "name": "Outside Humidity",
+        "type": "point",
+        "unit": "%"
+    },
+    {
+        "name": "Engine Temperature",
+        "type": "point",
+        "unit": "C"
+    },
+    {
+        "name": "Summer Images",
+        "type": "image",
+        "unit": ""
+    },
+    {
+        "name": "Winter Images",
+        "type": "image",
+        "unit": ""
+    }
+]

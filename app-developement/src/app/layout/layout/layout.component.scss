@@ -1,0 +1,102 @@
+@import '../../shared/shared.scss';
+
+.workspace {
+    position:absolute;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(circle farthest-side at 10% 10%,  white, $skyAutumnLight, $skyAutumnBlue, $skyAutumnDark);
+    overflow: auto;
+}
+.navigation-panel {
+  position: fixed;
+  height: 2rem;
+  width: 100vw;
+  z-index: 200;
+}
+
+.workspace {
+
+  >.applet {
+    box-sizing: border-box;
+    border: 1px solid $uipanelColor;
+    box-shadow: 0 0 1px 1px black;
+    resize: none; //set to 'both' by a directive
+    overflow: hidden; 
+    // overflow is set to 'auto' by a directive, has to be hidden initially to fix bug!: 
+    // graph not resizing properly after fullscreen
+    position: absolute;
+    background-color: $appletBackgroundColor;
+    min-width: 200px;
+    min-height: 100px;
+  }
+  >.applet.commander {
+    min-width: 70px;
+    min-height: 40px;
+  }
+}
+
+.workspace>.applet.fullscreen {
+  position: fixed;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 501 !important;
+}
+
+.text {
+  color: $dirtyColor;
+  font-weight: bold;
+  font-size: 2rem;
+  background-color: black;
+  line-height: 1.7rem;
+  height: 1.7rem;
+  padding: 0.2rem;
+}
+
+.moveHandle {
+  display: none;
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  z-index: 200;
+  align-items: center;
+  >.text {
+    display: inline-block;
+    margin-right: 0.2rem;
+  }
+  >.handle {
+    display: inline-block;
+    height: 2rem;
+    width: 2rem;
+    background-image: url('../../../assets/moveArrow.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    cursor: grab;
+  }
+  >.handle:active:hover {
+    cursor: grabbing;
+  }
+}
+.resizeInfo {
+  display: none;
+  position: absolute;
+  height: 63px;
+  width: 150px;
+  bottom: 10px;
+  right: 14px;
+  background-color: transparent;
+  z-index: 200;
+  >.text {
+    position: absolute;
+    bottom: 26px; right: 70px;
+  }
+  >.arrow {
+    position: absolute;
+    bottom: 0px; right: 0px;
+    width: 70px; height: 30px;
+    background-image: url('../../../assets/resizeArrow.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+}

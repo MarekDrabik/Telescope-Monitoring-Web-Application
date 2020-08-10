@@ -1,0 +1,142 @@
+.playPause-buttons--flex {
+  grid-area: play-pause;
+  justify-self: right;
+  display: flex;
+  z-index: 1;
+  font-weight: bolder;
+  font-family: monospace;
+
+  & > div {
+    width: 1.3rem;
+  }
+
+  .realtimeInfo {
+    color: $realtime;
+  }
+
+  .playButton {
+    background-color: transparent;
+    position: relative;
+    color: $fixedtime;
+    font-weight: bold;
+    white-space: nowrap;
+
+    .onHover {
+      display: none;
+      direction: rtl; //Resume is bigger than Paused
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      color: white;
+      background-color: rgba(0, 0, 0, 0.568);
+      z-index: 1;
+    }
+  }
+
+  .playButton:hover {
+    .onHover {
+      display: block;
+    }
+  }
+
+  .pauseButton {
+    background-color: transparent;
+    position: relative;
+    color: $realtime;
+    font-weight: bold;
+    white-space: nowrap;
+    .onHover {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      color: white;
+      background-color: rgba(0, 0, 0, 0.568);
+      z-index: 1;
+    }
+  }
+
+  .pauseButton:hover {
+    .onHover {
+      display: block;
+    }
+  }
+}
+
+@keyframes example {
+  0% {
+    color: $dirtyColor;
+    background-color: transparent;
+  }
+  50% {
+    color: $uipanelColor;
+    background-color: $dirtyColor;
+  }
+  100% {
+    color: $dirtyColor;
+    background-color: transparent;
+  }
+}
+
+.submit {
+  grid-area: play-pause;
+  justify-self: right;
+  display: flex;
+
+  > .confirm {
+    color: $dirtyColor;
+    background-color: transparent;
+    font-weight: bold;
+    padding: 0px 2px;
+    animation-name: example;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+  }
+
+  .confirm:hover {
+    color: $uipanelColor;
+    animation: none;
+    background-color: white;
+  }
+
+  .confirm:hover,
+  .cancel:hover {
+    background-color: white;
+  }
+}
+
+.cancel {
+  width: 1.3rem;
+  height: 1.3rem;
+  padding: 2px;
+  background-color: $uipanelColor;
+
+  > .cross {
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url("../../../assets/cross_red.png");
+  }
+}
+
+.recv.loadingHistory {
+  grid-area: play-pause;
+  justify-self: right;
+  z-index: 2;
+  display: flex;
+  cursor: wait;
+
+  .dots {
+    display: block;
+    text-decoration: none; //disable default styling of <abbr>
+    color: $dirtyColor;
+    background-color: transparent;
+    font-weight: bold;
+    padding: 0px 2px;
+  }
+}

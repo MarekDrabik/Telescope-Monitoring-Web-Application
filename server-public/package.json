@@ -1,0 +1,34 @@
+{
+  "name": "balon-projekt-server",
+  "version": "0.0.0",
+  "description": "public server for balonMonitoring app",
+  "main": "app/app.js",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "body-parser": "^1.19.0",
+    "config": "^3.3.1",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "https": "^1.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.10.0",
+    "mysql2": "^2.1.0",
+    "sequelize": "^6.3.3",
+    "ws": "^7.3.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarekDrabik/balon-projekt-server.git"
+  },
+  "author": "Marek Drabik",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MarekDrabik/balon-projekt-server/issues"
+  },
+  "homepage": "https://github.com/MarekDrabik/balon-projekt-server#readme"
+}

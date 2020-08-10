@@ -1,0 +1,207 @@
+<form  #formObject="ngForm" 
+  [ngClass]="{'realtimeHighlight': telemetryUpdateMode==='realtime', 'fixedtimeHighlight': telemetryUpdateMode==='fixedtime'}"
+  [appUipanelFormValidator]="formObject"
+  (rangeReversedError)="showRangeReversedError = $event"
+  >
+  
+  <!-- Range reversed error pop-up -->
+  <div class="rangeReversedErrorMessage error"
+    *ngIf="showRangeReversedError"
+    [@popUp]="'created'"
+  >
+    Invalid input: Cannot submit range where start date > end date.
+  </div>
+
+  <!-- History killed information pop-up -->
+  <div class="historyKilledInfo error"
+    *ngIf="showHistoryKilledInfo"
+    [@popUp]="'created'"
+    (click)="showHistoryKilledInfo=false"
+  >
+    Historical data retrieval was canceled by user. Currently displayed data set might be incomplete!
+  </div>
+
+  <!-- rangeStart input field -->
+  <div class="rangeGroup range-start"
+    [title]="hoverInfoService.rangeStartInfo"
+    ngModelGroup='rangeStart'
+    [ngClass]="{'disabled': (telemetryUpdateMode==='realtime' || _processingUserRequest),
+                'enabled': (telemetryUpdateMode==='fixedtime' && !_processingUserRequest)}"
+  > 
+    <div class="disabledOverlay" 
+      [title]="hoverInfoService.rangeStartInfo"
+    >
+    </div>
+    <!-- hidding useless mozzila cancel buttons of input: -->
+    <div class="hiddenCancelButtons" 
+      *ngIf="currentBrowserService.browser === 'mozzila'"
+    ></div>
+
+    <input 
+      class="range-start--date"
+      type='date'  
+      min='1900-01-01'
+      max='2300-01-01' 
+      [(ngModel)]="rangeStart_date"
+      name="date"
+      #rstart_date="ngModel"
+      appControlValidator
+      (ngModelChange)="onControlInput(formObject, rstart_date)"
+      (focus)="onControlFocus('rangeStart')"
+      (blur)="onControlBlur(rstart_date, 'rangeStart')"
+    >
+    <input 
+      class="range-start--time"
+      type='time'  
+      [(ngModel)]="rangeStart_time"
+      name="time"
+      #rstart_time="ngModel"
+      [step]="stepOfNumberInput"
+      appControlValidator
+      (ngModelChange)="onControlInput(formObject, rstart_time)"
+      (focus)="onControlFocus('rangeStart')"
+      (blur)="onControlBlur(rstart_time, 'rangeStart')"
+    >
+  </div>
+  
+   <!-- Submit button -->
+  <div class="submit" *ngIf="showSubmitButton===true && !_processingUserRequest">
+    <button class="confirm" *ngIf="showSubmitConfirmButton===true"
+      (click)="onSubmit($event, formObject, 'submit')"
+    >Submit</button>
+    <button class="cancel"
+      (click)="onCancelSubmit($event)"
+    ><div class="cross"></div>
+    </button>
+  </div>
+  
+  <!-- realtime fixedtime buttons -->
+  <div class="playPause-buttons--flex"
+    *ngIf="showSubmitButton===false && !_processingUserRequest"
+  >
+    <ng-container *ngIf="telemetryUpdateMode!=='realtime'; else pauseButton" >
+      <button class="playButton"
+        #playButton
+        (click)="onSubmit($event, formObject, 'play')"
+        [disabled]="_processingUserRequest"
+      >fixed time
+        <div class="onHover">resume</div>
+      </button>
+    </ng-container>
+
+    <ng-template #pauseButton>
+      <button class="pauseButton" 
+        (click)="onSubmit($event, formObject, 'pause')"
+        [disabled]="_processingUserRequest"
+      >real time
+        <div class="onHover">pause</div>
+      </button>
+      
+    </ng-template>
+  </div>
+
+  <!-- loading history -->
+  <div class="recv loadingHistory"
+    *ngIf="_processingUserRequest"
+  >
+    <abbr title="Fetching history..." class="dots">...</abbr>
+    <button class="cancel"
+      (click)="onKillHistory()"
+    ><div class="cross"></div>
+    </button>
+  </div>
+
+  <!-- rangeDiff input field -->
+  <div class="rangeGroup range-diff" 
+    ngModelGroup="rangeDiff"
+    [title]="hoverInfoService.rangeDiffInfo"
+    [ngClass]="{'disabled': (telemetryUpdateMode==='fixedtime' || _processingUserRequest),
+                'enabled': (telemetryUpdateMode==='realtime' && !_processingUserRequest)}"
+    >
+    <div class="disabledOverlay"
+      [title]="hoverInfoService.rangeDiffInfo"
+    ></div>
+    <input 
+      [disabled]="telemetryUpdateMode==='fixedtime' || _processingUserRequest"
+      autocomplete="off"
+      [appAutoStretchInput]="rangeDiff"
+      [autoStretchCharWidth]="0.6"
+      [autoStretchPadding]="0.4"
+      [(ngModel)]="rangeDiff"
+      name="timediff"
+      appControlValidator
+      #rdiffInput
+      #rdiff="ngModel"
+      (ngModelChange)="onControlInput(formObject, rdiff)"
+      (focus)="onControlFocus('rangeDiff')"
+      (blur)="onControlBlur(rdiff, 'rangeDiff')"
+    >
+  </div>
+
+  <!-- rangeEnd input field -->
+  <div class="rangeGroup range-end"
+    ngModelGroup="rangeEnd"
+    [title]="hoverInfoService.rangeEndInfo"
+    [ngClass]="{'disabled': (telemetryUpdateMode==='realtime' || _processingUserRequest),
+                'enabled': (telemetryUpdateMode==='fixedtime' && !_processingUserRequest)}"
+  >
+    <div class="disabledOverlay"
+      [title]="hoverInfoService.rangeEndInfo"
+    ></div>
+    <!-- hidding useless mozzila cancel buttons of input: -->
+    <div class="hiddenCancelButtons" 
+      *ngIf="currentBrowserService.browser === 'mozzila'"
+    ></div>
+    
+    <input 
+      class="range-end--date"
+      type='date'  
+      min='1900-01-01'
+      max='2300-01-01' 
+      [(ngModel)]="rangeEnd_date"
+      name="date"
+      appControlValidator
+      #rend_date="ngModel"
+      (ngModelChange)="onControlInput(formObject, rend_date)"
+      (focus)="onControlFocus('rangeEnd')"
+      (blur)="onControlBlur(rend_date, 'rangeEnd')"
+    >
+    <input 
+      class="range-end--time"
+      type='time' 
+      [(ngModel)]="rangeEnd_time"
+      name="time"
+      appControlValidator
+      [step]="stepOfNumberInput"
+      #rend_time="ngModel"
+      (ngModelChange)="onControlInput(formObject, rend_time)"
+      (focus)="onControlFocus('rangeEnd')"
+      (blur)="onControlBlur(rend_time, 'rangeEnd')"
+    >
+  </div>
+
+  <!-- noData error -->
+  <div class="noDataError" 
+    [@popUp]="'created'"  
+    *ngIf="(this.receivedCount==='0' && !_processingUserRequest)"
+  >no data available
+  </div>
+
+  <!-- received information -->
+  <div class="recv recv-pastDelay" 
+    [title]="hoverInfoService.recvPastDelay"
+  >{{receivedPastDelay}}</div> 
+  <div class="recv recv-diff"
+    [title]="hoverInfoService.recvDiff"
+  >{{receivedDiff}}</div>
+  <div class="recv recv-count" 
+    [title]="hoverInfoService.recvCount"
+  >#{{receivedCount}}</div>
+  <div class="recv recv-presentDelay" 
+    [ngClass]="{'delay': receivedPresentDelay[0]==='-'}"
+    [title]="hoverInfoService.recvPresentDelay"
+  >{{receivedPresentDelay}}</div>
+
+</form>
+
+

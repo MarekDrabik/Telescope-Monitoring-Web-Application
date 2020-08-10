@@ -1,0 +1,57 @@
+@import "../shared.scss";
+@import "./buttons.style.scss";
+@import "./infoError.style.scss";
+@import "./receivedInfo.style.scss";
+@import "./userInputs.style.scss";
+
+* {
+  box-sizing: border-box;
+}
+
+:host {
+  font-family: monospace;
+  width: 100%;
+  height: 3rem;
+  background-color: $uipanelColor;
+  color: $uiDefaultTextColor;
+  display: flex;
+  align-items: flex-end;
+}
+
+form.realtimeHighlight {
+  border-top: 4px solid $realtime;
+}
+
+form.fixedtimeHighlight {
+  border-top: 4px solid $fixedtime;
+}
+
+form {
+  position: relative; //for .error and .info
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 50% 50%; //% relative to element
+  grid-template-columns: auto 2px 2fr 2px 2fr 2px 2fr 2px auto;
+  grid-template-areas:
+    "range-left . recv-count . range-diff . play-pause . range-right"
+    "range-left . recv-pastDelay . recv-diff . recv-presentDelay . range-right";
+  align-content: end; //to have upper panel overflow
+}
+
+button {
+  z-index: 1;
+}
+input {
+  -webkit-appearance: none;
+  border: none;
+  outline: none; //default stupid border
+  font-family: inherit;
+  font-size: 0.95rem;
+  height: 95%;
+  width: 100%;
+  padding: 0px;
+  background-color: transparent;
+}
+
+

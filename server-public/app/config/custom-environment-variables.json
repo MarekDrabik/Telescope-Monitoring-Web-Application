@@ -1,0 +1,9 @@
+{
+  "name" : "balonServer_userName",
+  "password" : "balonServer_password",
+  "jwtPrivateKey": "balonServer_jwtPrivateKey",
+  "port": "balonServer_port",
+  "passphrase": "balonServer_passphraseSSL",
+  "balonDBpassword": "balonServer_publicDBPass",
+  "domain": "balonServer_domain"
+}

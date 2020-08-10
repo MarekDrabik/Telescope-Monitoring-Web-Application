@@ -1,0 +1,47 @@
+
+
+* {
+  box-sizing: border-box;
+}
+
+app-dygraphs {
+  width: 100%;
+  height: 100%;
+  padding-right: 1.5rem;
+  padding-left: 0rem;
+  padding-top: 1.3rem;
+  padding-bottom: 3.5rem;
+}
+app-dygraphs.mozzilaStyling {
+  padding-top: 1.6rem;
+}
+
+app-ui-panel {
+  // ui panel for graph applet needs absolute positioning
+  position: absolute;
+  bottom: 0px;
+}
+
+.graphPhrame {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display:flex;
+  flex-direction: column;
+  justify-content: stretch;
+
+}
+
+.invis {
+  width: 100%;
+  height: 3rem;
+  background-color: red;
+}
+
+.noSources {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(238, 187, 187);
+  text-align: center;
+}

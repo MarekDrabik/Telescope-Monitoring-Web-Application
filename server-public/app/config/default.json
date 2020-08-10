@@ -1,0 +1,9 @@
+{
+  "name" : "",
+  "password": "",
+  "jwtPrivateKey" : "",
+  "port": "",
+  "passphrase": "",
+  "balonDBpassword": "",
+  "domain": ""
+}

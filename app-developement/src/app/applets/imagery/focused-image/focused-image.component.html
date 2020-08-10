@@ -1,0 +1,15 @@
+<div class="container" [ngClass]="{'userSelected': userSelected}">
+  <ng-container *ngIf="currentBrowserService.browser !== 'mozzila'; else mozzilaTemplate">
+    <img draggable="false" [src]="imageUrl">
+  </ng-container>
+  <ng-template #mozzilaTemplate>
+    <div class="image"
+      appSetImageUrl
+      [focusedImageUrl]="imageUrl"
+    ></div>
+  </ng-template>
+  
+    
+  <div class="timestamp">{{timestamp}}</div>
+  <button *ngIf="userSelected" (click)="onResume($event)"></button>
+</div>

@@ -1,0 +1,103 @@
+.range-start {
+  grid-area: range-left;
+  justify-self: left;
+}
+
+.range-diff {
+  grid-area: range-diff;
+  justify-self: center;
+  align-items: center;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 1px;
+
+  input {
+    text-align: center;
+  }
+}
+
+.range-end {
+  grid-area: range-right;
+  justify-self: right;
+}
+
+.range-start,
+.range-end {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 2px 3px 0px 3px;
+
+  input {
+    text-align: left;
+  }
+}
+
+.rangeGroup {
+  position: relative;
+
+  > .disabledOverlay {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    z-index: 1;
+    cursor: default;
+  }
+}
+
+.rangeGroup.ng-dirty {
+  background-color: $dirtyColor !important;
+}
+
+.rangeGroup.ng-invalid input {
+  color: $clockRed !important;
+}
+
+.rangeGroup.enabled {
+  background-color: white;
+  cursor: text;
+}
+
+.rangeGroup input:enabled:hover {
+  font-weight: bold;
+  cursor: inherit;
+}
+
+.rangeGroup.disabled {
+  background-color: $appletPhrameColorLigthed;
+
+  > .disabledOverlay {
+    display: block;
+  }
+}
+
+.rangeGroup.disabled,
+.rangeGroup.disabled input {
+  color: black;
+  cursor: default;
+}
+
+// hidding useless mozzila cancel buttons of input: 
+.hiddenCancelButtons {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 20px;
+  z-index: 10;
+}
+.range-start.disabled, .range-end.disabled {
+  .hiddenCancelButtons {
+    background-color: $appletPhrameColorLigthed;
+  }
+}
+.range-start.enabled, .range-end.enabled {
+  .hiddenCancelButtons {
+    background-color: white;
+  }
+}

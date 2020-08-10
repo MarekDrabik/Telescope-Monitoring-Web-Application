@@ -1,0 +1,34 @@
+<main class="phrame"
+  *ngIf="sourceToDisplay.length !== 0"
+  >
+  <app-focused-image class="focusedImageWindow" 
+    [telemetryCache]="_telemetryCache"
+  ></app-focused-image>
+
+  <app-timeline class="timeline"
+    [telemetryUpdateMode]="telemetryUpdateMode"
+    [thumbnails]="_telemetryCache"
+    [@timelineCollapse]="timelineCollapsed"
+  ></app-timeline>
+  
+  <app-ui-panel
+    [telemetryUpdateMode]="telemetryUpdateMode"
+    [rangesUpdateController]="rangesUpdateController"
+    [clockUpdateSpeed]="clockUpdateSpeed"
+    (userSubmit)="onUiPanelUserInput($event)"
+    [processingUserRequest]="processingUserRequest"
+    (killHistory)="onKill()"
+  ></app-ui-panel>
+  
+</main>
+<ng-content></ng-content>
+
+
+
+<div *ngIf="sourceToDisplay.length === 0"
+  class="noSources"
+>
+  <b>Imagery Applet</b><br>
+  Nothing to display: no telemetry source of type 'image' seems to be available. <br>
+  (Sources to be registered in 'telemetry-settings.json' file on the server.)
+</div>

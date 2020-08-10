@@ -1,0 +1,145 @@
+<app-header class="navigation-panel"></app-header>
+<app-lost-connection *ngIf="displayLostConnection"></app-lost-connection>
+
+<div class="workspace" #workspace>
+
+  <!-- IMAGERY -->
+  <app-imagery class="applet"
+    *ngFor="let imagery of imageries; trackBy:trackByFunction"
+    #applet
+    [appletId]="imagery.id"
+    [id]="imagery.id"
+    [ngStyle]="{
+      'width': imagery.size.width+'px',
+      'height': imagery.size.height+'px',
+      'top': imagery.position.y+'px',
+      'left': imagery.position.x+'px',
+      'z-index': imagery.zIndex
+    }"
+    
+    appOnClickFocus
+    appContextMenu
+    appAppletLayoutTracker
+    appMoveResize
+    appFullscreen
+    [appClockUpdateRate]="applet"
+    [submenuComponent]="imageryContextMenu"
+    [moveHandle]="moveHandle"
+    [resizeInfo]="resizeInfo"
+  >
+    <app-sub-menu #imageryContextMenu
+      [appletId]="imagery.id"
+      [telemetrySelectionOption_radio]="true"
+      [appletDeletionOption]="true"
+      [collapseTimelineOption]="true"
+      [fullscreenOption]="true"
+      [moveResizeOption]='true'
+      [clockUpdateRateOption]='true'
+    ></app-sub-menu>
+    <div #moveHandle class="moveHandle"><span class="text">move</span><span class="handle"></span></div>
+    <div #resizeInfo class="resizeInfo"><div class="text">resize</div><div class="arrow"></div></div>
+  </app-imagery>
+  
+  <!-- GRAPH -->
+  <app-graph class="applet"
+    *ngFor="let graph of graphs; trackBy:trackByFunction"
+    #applet
+    [appletId]="graph.id"
+    [id]="graph.id"
+    [ngStyle]="{
+      'width': graph.size.width+'px',
+      'height': graph.size.height+'px',
+      'top': graph.position.y+'px',
+      'left': graph.position.x+'px',
+      'z-index': 10
+    }"
+    appOnClickFocus
+    appContextMenu
+    appAppletLayoutTracker
+    appMoveResize
+    [appFullscreen]="applet"
+    [appClockUpdateRate]="applet"
+    [appFixDygraphResize]="applet"
+    [submenuComponent]="graphContextMenu"
+    [moveHandle]="moveHandle"
+    [resizeInfo]="resizeInfo"
+  >
+    <app-sub-menu #graphContextMenu
+      [appletId]="graph.id"
+      [telemetrySelectionOption_checkboxes]="true"
+      [appletDeletionOption]='true' 
+      [fullscreenOption]="true"
+      [moveResizeOption]='true'
+      [clockUpdateRateOption]='true'
+    ></app-sub-menu>
+    <div #moveHandle class="moveHandle"><span class="text">move</span><span class="handle"></span></div>
+    <div #resizeInfo class="resizeInfo"><div class="text">resize</div><div class="arrow"></div></div>
+  </app-graph>
+
+  <!-- TABLE -->
+  <app-table class="applet"
+    *ngFor="let table of tables; trackBy:trackByFunction"
+    #applet
+    [appletId]="table.id"
+    [id]="table.id"
+    [ngStyle]="{
+      'width': table.size.width+'px',
+      'height': table.size.height+'px',
+      'top': table.position.y+'px',
+      'left': table.position.x+'px',
+      'z-index': 10
+    }"
+    appOnClickFocus
+    appContextMenu
+    appAppletLayoutTracker
+    appMoveResize
+    appFullscreen
+    [appClockUpdateRate]="applet"
+    [submenuComponent]="tableContextMenu"
+    [moveHandle]="moveHandle"
+    [resizeInfo]="resizeInfo"
+  >
+      <app-sub-menu #tableContextMenu
+        [appletId]="table.id"
+        [telemetrySelectionOption_checkboxes]='true'
+        [appletDeletionOption]='true'   
+        [fullscreenOption]="true"
+        [moveResizeOption]='true'
+        [clockUpdateRateOption]='true'
+      ></app-sub-menu>
+      <div #moveHandle class="moveHandle"><span class="text">move</span><span class="handle"></span></div>
+      <div #resizeInfo class="resizeInfo"><div class="text">resize</div><div class="arrow"></div></div>
+  </app-table>
+
+  <!-- COMMANDER -->
+  <app-commander class="applet commander"
+    *ngFor="let commander of commanders; trackBy:trackByFunction"
+    #applet
+    [appletId]="commander.id"
+    [id]="commander.id"
+    [ngStyle]="{
+      'width': commander.size.width+'px',
+      'height': commander.size.height+'px',
+      'top': commander.position.y+'px',
+      'left': commander.position.x+'px',
+      'z-index': 10
+    }"
+    appOnClickFocus
+    appContextMenu
+    appAppletLayoutTracker
+    appMoveResize
+    [submenuComponent]="commanderContextMenu"
+    [moveHandle]="moveHandle"
+    [resizeInfo]="resizeInfo"
+  >
+      <app-sub-menu #commanderContextMenu
+        [appletId]="commander.id"
+        [appletDeletionOption]='true'
+        [moveResizeOption]='true' 
+      ></app-sub-menu>
+      <div #moveHandle class="moveHandle"><span class="text">move</span><span class="handle"></span></div>
+      <div #resizeInfo class="resizeInfo"><div class="text">resize</div><div class="arrow"></div></div>
+  </app-commander>
+
+</div>
+

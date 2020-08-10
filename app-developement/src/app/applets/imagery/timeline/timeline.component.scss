@@ -1,0 +1,25 @@
+@import '../../../shared/shared.scss';
+
+
+:host.timeline {
+  position: relative;
+  background-color: transparent;
+  display: block;
+  align-content: end;
+
+  .thumbsContainer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    //changing from flex-direction: row-reverse to flex-direction: row + dir: rlt because of mozzila bug
+    flex-direction: row;
+    direction: rtl;
+    overflow-x: scroll;
+    background-color: $appletPhrameColor;
+    padding-bottom: 2px;
+  }
+
+}
+
+

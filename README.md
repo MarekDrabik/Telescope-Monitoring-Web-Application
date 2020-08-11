@@ -19,7 +19,7 @@ vo webovom prehliadači, a preto je možné aplikáciu vypnúť bez straty nasta
 
 ## Použité technológie
 * Angular 8, RxJS, Typescript, Node.js, SCSS
-* interaktívne grafy sú zásluhou opensource projektu [Dygraphs](http://dygraphs.com/)
+* interaktívne grafy sú vytvorené opensource balíkom [Dygraphs](http://dygraphs.com/)
 
 ## Možnosť vyskúšať
 

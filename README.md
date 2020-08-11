@@ -17,6 +17,10 @@ Aplikácia je flexibilná a nastaviteľná podľa vkusu užívateľa. Všetky ok
 Je možné vytvoriť viacero okien, ktoré zobrazia jeden alebo viacero zdrojov telemetrie. Posledné nastavenia užívateľa sú uložené 
 vo webovom prehliadači, a preto je možné aplikáciu vypnúť bez straty nastavenia.
 
+## Použité technológie
+* Angular 8, RxJS, Typescript, Node.js, SCSS
+* interaktívne grafy sú zásluhou opensource projektu [Dygraphs](http://dygraphs.com/)
+
 ## Možnosť vyskúšať
 
 Aplikácia je pre účely prezentácie k dispozícii na vyskúšanie na adrese: https://87.197.183.237:5444 <br>

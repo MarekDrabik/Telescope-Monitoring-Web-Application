@@ -1,4 +1,4 @@
-# TelescopeMonitoring (Angular 8)
+# Telescope Monitoring (Angular 8)
 
 <img align="right" src="/.doc/balonMonitoring.png" width="500">
 Táto webová aplikácia slúži na zobrazovanie číselnej a obrázkovej telemetrie v reálnom čase.

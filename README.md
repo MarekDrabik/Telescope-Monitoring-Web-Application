@@ -25,3 +25,5 @@ Dáta zobrazované v tejto verejnej verzii sú generované umelo na serveri, a t
 Dáta sú ale ďalej spracované štandardne, to znamená uložené do databázy, odkiaľ sú poskytované užívateľovi 
 podľa ním zadaných časových intervalov v aplikácii.
 
+**Stručný návod:**
+<img align="center" src="/.doc/navod.png" width="1000">

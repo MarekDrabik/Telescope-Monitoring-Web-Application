@@ -1,4 +1,4 @@
-# BalloonMonitoring (Angular 8)
+# TelescopeMonitoring (Angular 8)
 
 <img align="right" src="/.doc/balonMonitoring.png" width="500">
 Táto webová aplikácia slúži na zobrazovanie číselnej a obrázkovej telemetrie v reálnom čase.
@@ -25,5 +25,5 @@ Dáta zobrazované v tejto verejnej verzii sú generované umelo na serveri, a t
 Dáta sú ale ďalej spracované štandardne, to znamená uložené do databázy, odkiaľ sú poskytované užívateľovi 
 podľa ním zadaných časových intervalov v aplikácii.
 
-**Stručný návod:**
+**Stručný návod:**<br>
 <img align="center" src="/.doc/navod.png" width="600">

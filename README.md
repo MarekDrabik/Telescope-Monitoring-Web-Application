@@ -26,4 +26,4 @@ Dáta sú ale ďalej spracované štandardne, to znamená uložené do databázy
 podľa ním zadaných časových intervalov v aplikácii.
 
 **Stručný návod:**<br>
-<img align="right" src="/.doc/navod.png" width="600">
+<img align="middle" src="/.doc/navod.png" width="600">

@@ -3,7 +3,8 @@
 <img align="right" src="/.doc/balonMonitoring.png" width="500"></img>
 Táto webová aplikácia slúži na zobrazovanie číselnej a obrázkovej telemetrie v reálnom čase.
 Aplikáciu vytváram na žiadosť môjho bratranca ktorý pracuje na projekte spoločnosti NASA.
-Projektom je teleskop, ktorý bude uskutočňovať merania a pozorovania na okraji zemskej atmosféry ([viac o NASA projekte][1]).
+Projektom je teleskop, ktorý bude uskutočňovať merania a pozorovania na okraji zemskej atmosféry.
+(Viac o NASA projekte[1], kontaktná osoba: viliam.klein@gmail.com ).
 
 V tomto projekte má moja aplikácia prevziať hlavnú úlohu pri zobrazovaní telemetrie a vzdialenom nastavovaní zariadenia.
 
@@ -38,4 +39,4 @@ visitor
 **Stručný návod:**<br>
 <img align="center" src="/.doc/navod.png" width="600"></img>
 
-[1]: <https://data.nasa.gov/dataset/THAI-SPICE-Testbed-for-High-Acuity-Imaging-Stable-/id3c-sf6a>
+[1]: <https://techport.nasa.gov/view/94313>

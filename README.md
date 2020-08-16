@@ -3,7 +3,7 @@
 <img align="right" src="/.doc/balonMonitoring.png" width="500">
 Táto webová aplikácia slúži na zobrazovanie číselnej a obrázkovej telemetrie v reálnom čase.
 Aplikáciu vytváram na žiadosť môjho bratranca ktorý pracuje na projekte spoločnosti NASA.
-Projektom je teleskop, ktorý bude uskutočňovať merania a pozorovania na okraji zemskej atmosféry [tests](www.google.com)
+Projektom je teleskop, ktorý bude uskutočňovať merania a pozorovania na okraji zemskej atmosféry [Dygraphs](http://dygraphs.com/)  [tests](www.google.com)
 .<br>
 
 V tomto projekte má moja aplikácia prevziať hlavnú úlohu pri zobrazovaní telemetrie a vzdialenom nastavovaní zariadenia.
@@ -20,7 +20,7 @@ vo webovom prehliadači, a preto je možné aplikáciu vypnúť bez straty nasta
 
 ## Použité technológie
 * Angular 8, RxJS, Typescript, Node.js, SCSS
-* interaktívne grafy sú vytvorené opensource balíkom [Dygraphs](http://dygraphs.com/)
+* interaktívne grafy sú vytvorené opensource balíkom [Dygraphs](http://dygraphs.com/) [Dygraphs](http://dygraphs.com/)
 
 ## Možnosť vyskúšať
 

@@ -30,7 +30,8 @@ Dáta zobrazované v tejto verejnej verzii sú generované umelo na serveri, a t
 Dáta sú ale ďalej spracované štandardne, to znamená uložené do databázy, odkiaľ sú poskytované užívateľovi 
 podľa ním zadaných časových intervalov v aplikácii. <br>
 Prístupové údaje do aplikácie:<br>
-```visitor
+```
+visitor
 1:OgaI82LKvjsd82/sk2F
 ```
 

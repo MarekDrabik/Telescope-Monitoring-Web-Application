@@ -39,4 +39,9 @@ visitor
 **Stručný návod:**<br>
 <img align="center" src="/.doc/navod.png" width="600"></img>
 
+## Github Repository
+V tomto repository nájdete kód celého projektu:
+* [app-developement](https://github.com/MarekDrabik/TelescopeMonitoring/tree/master/app-developement) - kód aplikácie pred kompiláciou
+* [server-public](https://github.com/MarekDrabik/TelescopeMonitoring/tree/master/server-public/app) - kód veréjneho servera, ktorý slúži ako webový server (poskytuje samotnú aplikáciu) a zároveň ako dátový server (zasiela telemetrické dáta užívateľom)
+
 [1]: <https://techport.nasa.gov/view/94313>

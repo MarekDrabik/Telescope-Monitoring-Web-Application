@@ -27,7 +27,7 @@ vo webovom prehliadači, a preto je možné aplikáciu vypnúť bez straty nasta
 Aplikácia je pre účely prezentácie k dispozícii na vyskúšanie, na adrese: <https://87.197.183.237:5444> <br>
 Pri prvom načítaní stránky sa môže zobraziť bezpečnostné upozornenie, to je treba odsúhlasiť (potvrdiť výnimku na certifikát). <br>
 Dáta zobrazované v tejto verejnej verzii sú generované umelo na serveri, a teda neide o reálne merania. <br>
-Dáta sú ale ďalej spracované štandardne, to znamená uložené do databázy, odkiaľ sú poskytované užívateľovi 
+Dáta sú ale ďalej spracované štandardne, to znamená, uložené do databázy, odkiaľ sú poskytované užívateľovi 
 podľa ním zadaných časových intervalov v aplikácii. <br>
 
 **Prístupové údaje do aplikácie:**<br>

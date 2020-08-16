@@ -3,13 +3,13 @@
 <img align="right" src="/.doc/balonMonitoring.png" width="500">
 Táto webová aplikácia slúži na zobrazovanie číselnej a obrázkovej telemetrie v reálnom čase.
 Aplikáciu vytváram na žiadosť môjho bratranca ktorý pracuje na projekte spoločnosti NASA.
-Projektom je teleskop, ktorý bude uskutočňovať merania a pozorovania na okraji zemskej atmosféry [tests](http://data.nasa.gov/dataset/THAI-SPICE-Testbed-for-High-Acuity-Imaging-Stable/id3c-sf6a)
+Projektom je teleskop, ktorý bude uskutočňovať merania a pozorovania na okraji zemskej atmosféry [tests](www.google.com)
 .<br>
 
 V tomto projekte má moja aplikácia prevziať hlavnú úlohu pri zobrazovaní telemetrie a vzdialenom nastavovaní zariadenia.
 
 Aplikácia je v momentálne stave už použiteľná a jej základné funkcie sú k dispozícii:
-* zobrazovanie číselnej telemetrie v interaktívnom grafe alebo v tabuľke
+* zobrazovanie číselnej telemetrie v interaktívnom grafe alebo v tabuľkedoesnt work
 * zobrazovanie obrázkovej telemetrie
 * nastaviteľný časový rozsah zobrazených dát a ľubovoľný náhľad do histórie
 * zasielanie príkazov na meracie zariadenie

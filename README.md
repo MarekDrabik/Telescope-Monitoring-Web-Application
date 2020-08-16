@@ -4,7 +4,7 @@
 Táto webová aplikácia slúži na zobrazovanie číselnej a obrázkovej telemetrie v reálnom čase.
 Aplikáciu vytváram na žiadosť môjho bratranca ktorý pracuje na projekte spoločnosti NASA.
 Projektom je teleskop, ktorý bude uskutočňovať merania a pozorovania na okraji zemskej atmosféry. 
-Viac informácií o NASA projekte nájdete tu: [Project THAI-SPICE](https://data.nasa.gov/dataset/THAI-SPICE-Testbed-for-High-Acuity-Imaging-Stable-/id3c-sf6a)
+Viac informácií o NASA projekte nájdete tu: [Project THAI-SPICE](https://data.nasa.gov/dataset/THAI-SPICE-Testbed-for-High-Acuity-Imaging-Stable-/id3c-sf6a)<br>
 
 V tomto projekte má moja aplikácia prevziať hlavnú úlohu pri zobrazovaní telemetrie a vzdialenom nastavovaní zariadenia.
 
@@ -29,7 +29,8 @@ Pri prvom načítaní stránky sa môže zobraziť bezpečnostné upozornenie, t
 Dáta zobrazované v tejto verejnej verzii sú generované umelo na serveri, a teda neide o reálne merania. <br>
 Dáta sú ale ďalej spracované štandardne, to znamená uložené do databázy, odkiaľ sú poskytované užívateľovi 
 podľa ním zadaných časových intervalov v aplikácii. <br>
-Prístupové údaje do aplikácie:<br>
+
+**Prístupové údaje do aplikácie:**<br>
 ```
 visitor
 1:OgaI82LKvjsd82/sk2F

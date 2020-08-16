@@ -9,7 +9,7 @@ Projektom je teleskop, ktorý bude uskutočňovať merania a pozorovania na okra
 V tomto projekte má moja aplikácia prevziať hlavnú úlohu pri zobrazovaní telemetrie a vzdialenom nastavovaní zariadenia.
 
 Aplikácia je v momentálne stave už použiteľná a jej základné funkcie sú k dispozícii:
-* zobrazovanie číselnej telemetrie v interaktívnom grafe alebo v tabuľkedoesnt work
+* zobrazovanie číselnej telemetrie v interaktívnom grafe alebo v tabuľke
 * zobrazovanie obrázkovej telemetrie
 * nastaviteľný časový rozsah zobrazených dát a ľubovoľný náhľad do histórie
 * zasielanie príkazov na meracie zariadenie

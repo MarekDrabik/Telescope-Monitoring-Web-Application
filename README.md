@@ -32,8 +32,8 @@ podľa ním zadaných časových intervalov v aplikácii. <br>
 
 **Prístupové údaje do aplikácie:**<br>
 ```
-visitor
-1:OgaI82LKvjsd82/sk2F
+**meno:**visitor
+**heslo:**1:OgaI82LKvjsd82/sk2F
 ```
 
 **Stručný návod:**<br>

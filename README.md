@@ -3,7 +3,7 @@
 <img align="right" src="/.doc/balonMonitoring.png" width="500"></img>
 Táto webová aplikácia slúži na zobrazovanie číselnej a obrázkovej telemetrie v reálnom čase.
 
-Aplikáciu vytváram na žiadosť môjho známeho ktorý pracuje na projekte spoločnosti NASA.
+Aplikáciu vytváram na žiadosť môjho známeho, ktorý pracuje na projekte spoločnosti NASA.
 Projektom je teleskop, ktorý bude uskutočňovať merania a pozorovania na okraji zemskej atmosféry (https://techport.nasa.gov/view/94313). <br>
 V tomto projekte má moja aplikácia prevziať hlavnú úlohu pri zobrazovaní telemetrie a vzdialenom nastavovaní zariadenia.
 Emailová adresa a telefónne číslo kontaktnej osoby pre NASA projekt: _viliam.klein@gmail.com_, _+1 303-827-6422_

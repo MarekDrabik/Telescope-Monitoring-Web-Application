@@ -17,7 +17,11 @@ Aplikácia je flexibilná a nastaviteľná podľa vkusu užívateľa. Všetky ok
 Je možné vytvoriť viacero okien, ktoré zobrazia jeden alebo viacero zdrojov telemetrie. Posledné nastavenia užívateľa sú uložené 
 vo webovom prehliadači, a preto je možné aplikáciu vypnúť bez straty nastavenia.
 
-## Možnosť vyskúšať
+## Viac o NASA projekte
+web: https://techport.nasa.gov/view/94313 <br>
+kontaktná osoba: Viliam Klein, viliam.klein@gmail.com, +1 303-827-6422
+
+## Aplikáciu je možné vyskúšať
 
 Aplikácia je pre účely prezentácie k dispozícii na vyskúšanie na adrese: <https://87.197.183.237:5444> <br>
 Pri prvom načítaní stránky sa môže zobraziť bezpečnostné upozornenie, to je treba odsúhlasiť (potvrdiť výnimku na certifikát). <br>
@@ -34,11 +38,7 @@ visitor
 **Stručný návod:**<br>
 <img align="center" src="/.doc/navod.png" width="600"></img>
 
-# Webová stránka a kontaktná osoba NASA projektu
-https://techport.nasa.gov/view/94313 <br>
-Viliam Klein <br>
-viliam.klein@gmail.com <br>
-+1 303-827-6422 <br>
+
 
 ## Použité technológie
 * Angular 8, RxJS, Typescript, Node.js, SCSS

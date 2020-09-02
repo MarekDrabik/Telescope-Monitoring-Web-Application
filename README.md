@@ -3,8 +3,9 @@
 <img align="right" src="/.doc/balonMonitoring.png" width="500"></img>
 Táto webová aplikácia slúži na zobrazovanie číselnej a obrázkovej telemetrie v reálnom čase.
 Aplikáciu vytváram na žiadosť môjho známeho ktorý pracuje na projekte spoločnosti NASA.
-Projektom je teleskop, ktorý bude uskutočňovať merania a pozorovania na okraji zemskej atmosféry 
-([viac o NASA projekte][1], kontaktná osoba: _viliam.klein@gmail.com_, _+1 303-827-6422_).
+Projektom je teleskop, ktorý bude uskutočňovať merania a pozorovania na okraji zemskej atmosféry.
+Viac o tomto NASA projekte nájdete tu: https://techport.nasa.gov/view/94313 <br>
+Emailová adresa a telefón kontaktnej osoby: _viliam.klein@gmail.com_, _+1 303-827-6422_
 
 V tomto projekte má moja aplikácia prevziať hlavnú úlohu pri zobrazovaní telemetrie a vzdialenom nastavovaní zariadenia.
 
@@ -44,4 +45,3 @@ V tomto repository nájdete kód celého projektu:
 * [app-developement](https://github.com/MarekDrabik/TelescopeMonitoring/tree/master/app-developement) - kód aplikácie pred kompiláciou
 * [server-public](https://github.com/MarekDrabik/TelescopeMonitoring/tree/master/server-public/app) - kód veréjneho servera, ktorý slúži ako webový server (poskytuje samotnú aplikáciu) a zároveň ako dátový server (zasiela telemetrické dáta užívateľom)
 
-[1]: <https://techport.nasa.gov/view/94313>

@@ -4,9 +4,11 @@
 Táto webová aplikácia slúži na zobrazovanie číselnej a obrázkovej telemetrie v reálnom čase.
 
 Aplikáciu vytváram na žiadosť môjho známeho, ktorý pracuje na projekte spoločnosti NASA.
-Projektom je teleskop, ktorý bude uskutočňovať merania a pozorovania na okraji zemskej atmosféry (https://techport.nasa.gov/view/94313). <br>
+Projektom je teleskop, ktorý bude uskutočňovať merania a pozorovania na okraji zemskej atmosféry (). <br>
 V tomto projekte má moja aplikácia prevziať hlavnú úlohu pri zobrazovaní telemetrie a vzdialenom nastavovaní zariadenia.
-Emailová adresa a telefónne číslo kontaktnej osoby pre NASA projekt: _viliam.klein@gmail.com_, _+1 303-827-6422_
+
+_Webová stránka NASA projektu: https://techport.nasa.gov/view/94313 _
+_Kontaktná osoba: Viliam Klein_, _viliam.klein@gmail.com_, _+1 303-827-6422_
 
 Aplikácia je v momentálne stave už použiteľná a jej základné funkcie sú k dispozícii:
 * zobrazovanie číselnej telemetrie v interaktívnom grafe alebo v tabuľke

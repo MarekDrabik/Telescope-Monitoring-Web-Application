@@ -18,8 +18,8 @@ Je možné vytvoriť viacero okien, ktoré zobrazia jeden alebo viacero zdrojov 
 vo webovom prehliadači, a preto je možné aplikáciu vypnúť bez straty nastavenia.
 
 ## Viac o NASA projekte
-web: https://techport.nasa.gov/view/94313 <br>
-kontaktná osoba: Viliam Klein, viliam.klein@gmail.com, +1 303-827-6422
+**web:** https://techport.nasa.gov/view/94313 <br>
+**kontaktná osoba:** Viliam Klein, viliam.klein@gmail.com, +1 303-827-6422
 
 ## Aplikáciu je možné vyskúšať
 

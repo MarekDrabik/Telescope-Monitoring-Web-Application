@@ -8,7 +8,7 @@ Projektom je teleskop, ktorý bude uskutočňovať merania a pozorovania na okra
 V tomto projekte má moja aplikácia prevziať hlavnú úlohu pri zobrazovaní telemetrie a vzdialenom nastavovaní zariadenia.
 
 _**Webová stránka NASA projektu:**_ https://techport.nasa.gov/view/94313 <br>
-_**Kontaktná osoba:_** _Viliam Klein_, _viliam.klein@gmail.com_, _+1 303-827-6422_
+_**Kontaktná osoba:** Viliam Klein_, _viliam.klein@gmail.com_, _+1 303-827-6422_
 
 Aplikácia je v momentálne stave už použiteľná a jej základné funkcie sú k dispozícii:
 * zobrazovanie číselnej telemetrie v interaktívnom grafe alebo v tabuľke

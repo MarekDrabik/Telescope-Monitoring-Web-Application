@@ -7,12 +7,6 @@ Aplikáciu vytváram na žiadosť môjho známeho, ktorý pracuje na projekte sp
 Projektom je teleskop, ktorý bude uskutočňovať merania a pozorovania na okraji zemskej atmosféry. <br>
 V tomto projekte má moja aplikácia prevziať hlavnú úlohu pri zobrazovaní telemetrie a vzdialenom nastavovaní zariadenia.
 
-**Webová stránka a kontaktná osoba NASA projektu:** 
-> https://techport.nasa.gov/view/94313 <br>
-> Viliam Klein <br>
-> viliam.klein@gmail.com <br>
-> +1 303-827-6422 <br>
-
 Aplikácia je v momentálne stave už použiteľná a jej základné funkcie sú k dispozícii:
 * zobrazovanie číselnej telemetrie v interaktívnom grafe alebo v tabuľke
 * zobrazovanie obrázkovej telemetrie
@@ -22,10 +16,6 @@ Aplikácia je v momentálne stave už použiteľná a jej základné funkcie sú
 Aplikácia je flexibilná a nastaviteľná podľa vkusu užívateľa. Všetky okná je možné ľubovoľne presúvať a meniť ich veľkosť. 
 Je možné vytvoriť viacero okien, ktoré zobrazia jeden alebo viacero zdrojov telemetrie. Posledné nastavenia užívateľa sú uložené 
 vo webovom prehliadači, a preto je možné aplikáciu vypnúť bez straty nastavenia.
-
-## Použité technológie
-* Angular 8, RxJS, Typescript, Node.js, SCSS
-* interaktívne grafy sú vytvorené pomocou open source balíka [Dygraphs](http://dygraphs.com/)
 
 ## Možnosť vyskúšať
 
@@ -43,6 +33,16 @@ visitor
 
 **Stručný návod:**<br>
 <img align="center" src="/.doc/navod.png" width="600"></img>
+
+# Webová stránka a kontaktná osoba NASA projektu
+https://techport.nasa.gov/view/94313 <br>
+Viliam Klein <br>
+viliam.klein@gmail.com <br>
++1 303-827-6422 <br>
+
+## Použité technológie
+* Angular 8, RxJS, Typescript, Node.js, SCSS
+* interaktívne grafy sú vytvorené pomocou open source balíka [Dygraphs](http://dygraphs.com/)
 
 ## Github Repository
 V tomto repository nájdete kód celého projektu:

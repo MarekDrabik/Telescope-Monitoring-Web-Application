@@ -36,7 +36,7 @@ visitor
 ```
 
 **Stručný návod:**<br>
-<img align="center" src="/.doc/navod.png" width="600"></img>
+<img align="center" src="/.doc/navod1.png" width="600"></img>
 
 
 

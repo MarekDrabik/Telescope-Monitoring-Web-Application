@@ -47,7 +47,7 @@ export class RangesUpdateController {
   }
 
   tickRealtimeControlsAndTrimCache(
-    currentTime: EpochNumber = Date.now(), 
+    currentTime: EpochNumber = Date.now(),
     currentDiffValue: string = this.rangeDiffSubject.getValue().timediff
   ) {
     //start + end controls

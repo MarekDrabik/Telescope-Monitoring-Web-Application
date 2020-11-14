@@ -107,7 +107,7 @@ export interface DygraphOptions {
 export type DygraphSubject = ReplaySubject<{ //making dygraph update the graph,
   // replay provides buffered pushes whenever dygraph component subscribes
   withoutCheck?: DygraphOptions, //withoutCheck option is updated on every push
-  withCheck?: DygraphOptions, //withCheck makes dygraph component check 
+  withCheck?: DygraphOptions, //withCheck makes dygraph component check
   // each of provided option if it isn't already in place, ignoring if so
   resize?: boolean, //custom command for dygraph to resize chart to parent container
   //fixing sizing bug while user resizes the applet,
@@ -116,3 +116,5 @@ export type DygraphSubject = ReplaySubject<{ //making dygraph update the graph,
   dontMoveZoomWindow?: boolean // fixing bug where horizontal zoom moved too fast on realtime update
   // because we are trimming cache also outside the telemetry update event
 }>;
+
+export type ConnectionProblem = 'session expired' | 'connection broken'

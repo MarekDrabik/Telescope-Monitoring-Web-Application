@@ -1,5 +1,5 @@
 <app-header class="navigation-panel"></app-header>
-<app-lost-connection *ngIf="displayLostConnection"></app-lost-connection>
+<app-lost-connection *ngIf="displayLostConnection" [cause]="connectionProblemCause"></app-lost-connection>
 
 <div class="workspace" #workspace>
 
@@ -16,7 +16,7 @@
       'left': imagery.position.x+'px',
       'z-index': imagery.zIndex
     }"
-    
+
     appOnClickFocus
     appContextMenu
     appAppletLayoutTracker
@@ -39,7 +39,7 @@
     <div #moveHandle class="moveHandle"><span class="text">move</span><span class="handle"></span></div>
     <div #resizeInfo class="resizeInfo"><div class="text">resize</div><div class="arrow"></div></div>
   </app-imagery>
-  
+
   <!-- GRAPH -->
   <app-graph class="applet"
     *ngFor="let graph of graphs; trackBy:trackByFunction"
@@ -67,7 +67,7 @@
     <app-sub-menu #graphContextMenu
       [appletId]="graph.id"
       [telemetrySelectionOption_checkboxes]="true"
-      [appletDeletionOption]='true' 
+      [appletDeletionOption]='true'
       [fullscreenOption]="true"
       [moveResizeOption]='true'
       [clockUpdateRateOption]='true'
@@ -102,7 +102,7 @@
       <app-sub-menu #tableContextMenu
         [appletId]="table.id"
         [telemetrySelectionOption_checkboxes]='true'
-        [appletDeletionOption]='true'   
+        [appletDeletionOption]='true'
         [fullscreenOption]="true"
         [moveResizeOption]='true'
         [clockUpdateRateOption]='true'
@@ -135,7 +135,7 @@
       <app-sub-menu #commanderContextMenu
         [appletId]="commander.id"
         [appletDeletionOption]='true'
-        [moveResizeOption]='true' 
+        [moveResizeOption]='true'
       ></app-sub-menu>
       <div #moveHandle class="moveHandle"><span class="text">move</span><span class="handle"></span></div>
       <div #resizeInfo class="resizeInfo"><div class="text">resize</div><div class="arrow"></div></div>

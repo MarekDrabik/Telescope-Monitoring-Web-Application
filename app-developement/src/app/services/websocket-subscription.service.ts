@@ -8,8 +8,8 @@ import { TelemetrySource } from '../types/custom.types';
 import { environment } from '../../environments/environment';
 import { ConnectionBrokenService } from './connection-broken.service';
 
-@Injectable({ 
-  providedIn: 'root' 
+@Injectable({
+  providedIn: 'root'
 })
 export class WebsocketSubscriptionService {
 
@@ -33,13 +33,15 @@ export class WebsocketSubscriptionService {
     },
     closeObserver: {
       next: close => {
-        // console.info("Realtime socket closed.", close)
+        if (close.code === 4001) {
+          this.connectionLostService.onExpiredSession()
+        }
       }
     }
   })
 
   subscribers = 0;
-  captainSubscriber: Subscription; //dummy subscriber to ws that is 
+  captainSubscriber: Subscription; //dummy subscriber to ws that is
   // opening/closing the socket by subscribing/unsub. first
   UNSUB_DELAY = 3000;
   pendingCloser; //setTimeout timer
@@ -51,12 +53,12 @@ export class WebsocketSubscriptionService {
   ) {
 
     for (let sourceName of this.telemetryModel.getAllSourceNames().concat('allPoints')) {
-      /* multiplex makes it possible to have only one server connection serving multiple 'customers'. 
+      /* multiplex makes it possible to have only one server connection serving multiple 'customers'.
       Each telemetry source has its own subscribe message and unsubscribe message which is delivered
       to the server on sub/unsub of that source to the socket. Messages served by the server are then
       filtered and served to each telemtrySource customer separately: */
 
-      /*(allPoints = all sources 'telemetrySource' are always requested for table/graph applet for simplicity, 
+      /*(allPoints = all sources 'telemetrySource' are always requested for table/graph applet for simplicity,
       single source functionality is available but not needed because the amount of data is very small to be
       bothered requesting them separately)*/
 
@@ -65,7 +67,7 @@ export class WebsocketSubscriptionService {
         () => ({ unsubscribe: sourceName }), //source specific unsubscription message to send to server on teardown
         message => message.name === sourceName //filtering logic by which received messages are handed to subscribers (applets)
       )
-        //finalize is called on observable complete/error. 
+        //finalize is called on observable complete/error.
         // .pipe(finalize(() => console.log('Multiplex complete on:', sourceName)))
 
         // share operator shares this telemetrySource data stream with other applets interested in
@@ -79,7 +81,8 @@ export class WebsocketSubscriptionService {
     // subscribe to realtime websocket
     let sub = WebsocketSubscriptionService.subscriptors[sourceName].subscribe(
       callback,
-      error => { 
+      error => {
+        // error.code === 1006 on realtime disconnect,
         console.error("Error, disconnected from realtime update.", error)
         this.connectionLostService.onConnectionBroken()
       }

@@ -6,9 +6,13 @@ import { HttpRequestParams_startend_partial } from '../types/custom.types';
 
 export class TelemetryUpdateModeController {
 
+  constructor(
+    private telemetryApplet: GraphComponent | TableComponent | ImageryComponent
+  ) { }
+
   private _historySubscriptionCallbacks = [
     partialOfData => {
-      /* as th      ere is always just one message from server for table and graph telemetry
+      /* as there is always just one message from server for table and graph telemetry
       set processingUserRequest false to hide history kill button before rendering the data */
       if (this.telemetryApplet.appletType === 'table' || this.telemetryApplet.appletType === 'graph') {
         this.telemetryApplet.processingUserRequest = false;
@@ -16,10 +20,7 @@ export class TelemetryUpdateModeController {
       this.telemetryApplet.cacheController.appendHistory(partialOfData);
       this.telemetryApplet.rangesUpdateController.updateReceivedInfoControls()
     },
-    error => {
-      console.error("History request fail, server unreachable.", error)
-      this.telemetryApplet.connectionLostService.onConnectionBroken()
-    },
+    error => {},
     () => { // completes on all data received or on user history kill
       if (this.telemetryApplet.appletType === 'imagery') { // see callback abov
         this.telemetryApplet.processingUserRequest = false;
@@ -27,10 +28,6 @@ export class TelemetryUpdateModeController {
       this.telemetryApplet.processingUserRequest = false;
     }
   ]
-
-  constructor(
-    private telemetryApplet: GraphComponent | TableComponent | ImageryComponent
-  ) { }
 
   /* called on:
     1. telemetry applet onInit          -- during fixedtime
@@ -84,11 +81,11 @@ export class TelemetryUpdateModeController {
       this.telemetryApplet.telemetrySubscription = this.telemetryApplet.wsSubscriptionService.subscribe(
         this.telemetryApplet.getSourceToRequest()[0],
         (messageObj) => {
-          // join as array: [timestamp, ...values] 
+          // join as array: [timestamp, ...values]
           // multiple values in case of multiseries graph
           let receivedPoint = [messageObj.timestamp].concat(messageObj.value)
           /* update rangeStart+End controls with current time (tickRealtimeControlsAndTrimCache())
-          so that functions pushPointAndRemoveObsolete() and updateReceivedInfoControls() 
+          so that functions pushPointAndRemoveObsolete() and updateReceivedInfoControls()
           perform calculations with the most recent values */
           let currentRangeDiffValue = this.telemetryApplet.rangesUpdateController.rangeDiffSubject.getValue().timediff
           this.telemetryApplet.rangesUpdateController.tickRealtimeControlsAndTrimCache(Date.now(), currentRangeDiffValue)

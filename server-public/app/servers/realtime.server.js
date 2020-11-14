@@ -1,20 +1,20 @@
 const ws = require('ws')
 const TelemetryModel = require('../models/telemetry.model')
+const ConnectedClientsContainer = require('../models/connected-clients.model')
 
 module.exports = class RealtimeServer {
 
   static registeredSources = TelemetryModel.getAllSourceNames().concat('allPoints')
-  static connectedClients = []
+  static connectedClientsContainer = new ConnectedClientsContainer()
 
   listenOn(httpServer) {
     const wss = new ws.Server({server: httpServer}) //use the existing httpserver
 
     wss.on('connection', (ws, req) => { // ws = websocket created, req = request from client
       
-      if (RealtimeServer.connectedClients.includes(ws)) {
-        console.log('client already in list')
-      }
-      RealtimeServer.connectedClients.push(ws)
+      //console.log('CLIENT:', ws, '\n REQ:', req)
+	    
+      RealtimeServer.connectedClientsContainer.add(ws, req)
       // console.log("connection, clients:", RealtimeServer.connectedClients)
       ws.subscribedSources = []
       ws.on('message', (message) => {
@@ -31,7 +31,7 @@ module.exports = class RealtimeServer {
       ws.on('close', (code, reason) => {
         console.log('connection closed status, reason: ', code, ", ", reason)
         //kick the client from the register
-        this._kickClientFromList(ws)
+      	RealtimeServer.connectedClientsContainer.removeBySocket(ws)
       })
 
       ws.on('error', (socket, error) => {
@@ -40,10 +40,10 @@ module.exports = class RealtimeServer {
     })
   }
 
-  _kickClientFromList(clientWebSocket) {
-    RealtimeServer.connectedClients = RealtimeServer.connectedClients.filter(socket => socket !== clientWebSocket)
-    console.log("client kicked")
-  }
+ // _kickClientFromList(clientWebSocket) {
+ //   RealtimeServer.connectedClients = RealtimeServer.connectedClients.filter(socket => socket !== clientWebSocket)
+ //   console.log("client kicked")
+ // }
 
   _validRequest(messageObj) {
     if (messageObj.hasOwnProperty('subscribe')) {

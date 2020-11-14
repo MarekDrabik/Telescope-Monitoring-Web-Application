@@ -11,7 +11,7 @@ fs.readFile(__dirname + '/telemetry-settings.json', 'utf8', function (err, data)
 });
 const historyRoute = require('./routes/history')
 const commandRoute = require('./routes/command')
-const loginRouter = require('./routes/login');
+const authRouter = require('./routes/auth');
 const cors = require('cors'); 
 const Spacecraft = require("./utils/spacecraft")
 const SpacecraftEndpoint = require("./controllers/spacecraft.endpoint")
@@ -19,9 +19,8 @@ const RealtimeServer = require('./servers/realtime.server')
 const SpacecraftServer = require('./servers/spacecraft.server')
 const sequelize = require('./models/telemetry.seqModel')
 const telemetryModel = require('./models/telemetry.model')
-const checkIsAuthenticated = require("./utils/authentication")
+const authentication = require("./utils/authentication")
 const cookieParser = require('cookie-parser');
-const morgan = require('morgan');
 
 const shared = require('./utils/shared')
 const app = express()
@@ -45,25 +44,25 @@ spacecraft.startGenerating(spacecraftEndpoint.onMeasurementsReceived)
 
 app.use(cookieParser());
 app.use(bodyParser.json())
-app.use(cors()); //to not get CORS error on client
+app.use(cors()); 
+app.use(express.static(__dirname + '/public'));
 
 app.use('/', (req, res, next) => { 
 	let ip = req.header('x-forwarded-for') || req.connection.remoteAddress;
 	console.log('REQ:', "\nIP: ", ip, "\nURL: ", req.url, "\nBROWSER: ", req.headers['user-agent'], "\n"); 
 	next() 
 })
-app.use('/login', loginRouter);
-app.use('/', checkIsAuthenticated)
 
-app.use(express.static(__dirname + '/public'));
-app.use('/settings', (req, res, next) => {
+app.use('/auth', authRouter);
+
+//app.use('/', checkIsAuthenticated) //any request appart of /auth POST
+app.use('/settings', authentication.checkIsAuthenticated, (req, res, next) => {
   res.send(telemetryModel.getTelemetrySettings())
 })
-app.use('/command', commandRoute)
-app.use('/history', historyRoute)
+app.use('/command', authentication.checkIsAuthenticated, commandRoute)
+app.use('/history', authentication.checkIsAuthenticated, historyRoute)
 app.use((req, res, next) => {
-  res.status(404)
-  res.send('Path not found! dont you dare!')
+  res.redirect(301, '/index.html') //on not-found, redirect to app
 })
 
 sequelize.sync().then(result => {

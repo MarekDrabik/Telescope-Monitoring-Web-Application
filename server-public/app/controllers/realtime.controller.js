@@ -1,5 +1,6 @@
 const RealtimeServer = require('../servers/realtime.server')
 const TelemetryModel = require('../models/telemetry.model.js')
+const Authentication = require('../utils/authentication.js')
 
 module.exports = class RealtimeController {
 
@@ -13,7 +14,18 @@ module.exports = class RealtimeController {
       sources are registered in ws.subscribedSources of each client
     */
     let message = ''
-    for (let clientSocket of RealtimeServer.connectedClients){
+    const connectedClients = RealtimeServer.connectedClientsContainer.getClients()
+    for (let client of connectedClients){
+      let clientSocket = client.socket;
+      
+      //kick expired connections:
+      if(!Authentication.validateToken(client.token)){
+	//this kick from connectedClients is reduntdant because realtime server code
+	//has a listnere already, but anyway, for double safety...
+      	RealtimeServer.connectedClientsContainer.removeBySocket(client.socket);
+	clientSocket.close(4001, 'Session expired')
+	continue;
+      }
       
       for (let subSourceName of clientSocket.subscribedSources){
         let composeMessage = TelemetryModel.getMessageComposer(subSourceName)

@@ -4,26 +4,25 @@ const ConnectedClientsContainer = require('../models/connected-clients.model')
 
 module.exports = class RealtimeServer {
 
-  static registeredSources = TelemetryModel.getAllSourceNames().concat('allPoints')
   static connectedClientsContainer = new ConnectedClientsContainer()
+  static registeredSources = TelemetryModel.getAllRequestableSources()
 
   listenOn(httpServer) {
     const wss = new ws.Server({server: httpServer}) //use the existing httpserver
 
     wss.on('connection', (ws, req) => { // ws = websocket created, req = request from client
       
-      //console.log('CLIENT:', ws, '\n REQ:', req)
-	    
+      //console.log('CLIENT:', ws, '\n REQ:', req)	    
       RealtimeServer.connectedClientsContainer.add(ws, req)
-      // console.log("connection, clients:", RealtimeServer.connectedClients)
       ws.subscribedSources = []
       ws.on('message', (message) => {
-        var messageObj = JSON.parse(message)
-        // console.log(Date.now(), "request received: ", messageObj)
-        if (!this._validRequest(messageObj)) {
-          console.error('Invalid telemetry source requested. No action.')
+        console.log(Date.now(), "request received: ", message)
+        if (!this._validRequest(message)) {
+          console.error('Invalid realtime request. No action.')
           return
         }
+        // Parsing JSON only after validation!
+        var messageObj = JSON.parse(message)
         this._processRequest(messageObj, ws)
         console.log("subscribed:",ws.subscribedSources)
       })
@@ -40,19 +39,22 @@ module.exports = class RealtimeServer {
     })
   }
 
- // _kickClientFromList(clientWebSocket) {
- //   RealtimeServer.connectedClients = RealtimeServer.connectedClients.filter(socket => socket !== clientWebSocket)
- //   console.log("client kicked")
- // }
+  _validRequest(message) {
+    
+    let messageObj;
+    try {
+      messageObj = JSON.parse(message)
+    } catch (err) {
+      console.log(err)
+      return false
+    }
 
-  _validRequest(messageObj) {
     if (messageObj.hasOwnProperty('subscribe')) {
       if (RealtimeServer.registeredSources.includes(messageObj.subscribe)) {
         return true
       }
     }
     if (messageObj.hasOwnProperty('unsubscribe')) {
-      console.log("has property unsubscribe")
       if (RealtimeServer.registeredSources.includes(messageObj.unsubscribe)) {
         return true
       }

@@ -1,0 +1,32 @@
+.recv {
+  font-size: 0.9rem;
+  line-height: 1.9;
+}
+
+.recv-diff,
+.recv-count {
+  cursor: default;
+  z-index: 1;
+}
+
+.recv-diff {
+  grid-area: recv-diff;
+  justify-self: center;
+}
+
+.recv-count {
+  grid-area: recv-count;
+}
+
+.recv-pastDelay {
+  grid-area: recv-pastDelay;
+}
+
+.recv-presentDelay {
+  grid-area: recv-presentDelay;
+  text-align: right;
+}
+
+.delay {
+  color: $errorColor;
+}

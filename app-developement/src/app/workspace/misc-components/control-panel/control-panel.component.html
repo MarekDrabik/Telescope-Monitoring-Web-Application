@@ -1,0 +1,225 @@
+<form
+  #formObject="ngForm"
+  [ngClass]="{
+    realtimeHighlight: realtimeUpdateOn,
+    fixedtimeHighlight: !realtimeUpdateOn
+  }"
+  [appControlPanelFormValidator]="formObject"
+  (rangeReversedError)="showRangeReversedError = $event"
+>
+  <!-- Range reversed error pop-up -->
+  <div
+    class="rangeReversedErrorMessage error"
+    *ngIf="showRangeReversedError"
+    [@popUp]="'created'"
+  >
+    Invalid input: Cannot submit range where start date > end date.
+  </div>
+
+  <!-- History killed information pop-up -->
+  <div
+    class="historyKilledInfo error"
+    *ngIf="showHistoryKilledInfo"
+    [@popUp]="'created'"
+    (click)="showHistoryKilledInfo = false"
+  >
+    Historical data retrieval was canceled by user. Currently displayed data set
+    might be incomplete!
+  </div>
+
+  <!-- rangeStart input field -->
+  <div
+    class="rangeGroup range-start"
+    [title]="hoverInfoService.rangeStartInfo"
+    ngModelGroup="rangeStart"
+    #rangeStartGroup="ngModelGroup"
+    [ngClass]="{
+      disabled: realtimeUpdateOn || processingUserRequest,
+      enabled: !realtimeUpdateOn && !processingUserRequest
+    }"
+  >
+    <div
+      class="disabledOverlay"
+      [title]="hoverInfoService.rangeStartInfo"
+    ></div>
+    <!-- hidding useless mozzila cancel buttons of input: -->
+    <div
+      class="hiddenCancelButtons"
+      *ngIf="currentBrowserService.browser === 'mozzila'"
+    ></div>
+
+    <input
+      class="range-start--date"
+      type="date"
+      min="1900-01-01"
+      max="2300-01-01"
+      [ngModel]="rangeStart | dateFromEpochnumber"
+      name="date"
+      #rstart_date="ngModel"
+      appControlValidator
+      (ngModelChange)="onControlInput(rstart_date)"
+    />
+    <input
+      class="range-start--time"
+      type="time"
+      [ngModel]="rangeStart | timeFromEpochnumber: this.clockUpdateRate"
+      name="time"
+      #rstart_time="ngModel"
+      [step]="clockUpdateRate === 'fast' ? '0.001' : '1'"
+      appControlValidator
+      (ngModelChange)="onControlInput(rstart_time)"
+    />
+  </div>
+
+  <!-- Submit button -->
+  <div
+    class="submit"
+    *ngIf="showSubmitPanel === true && !processingUserRequest"
+  >
+    <button
+      class="confirm"
+      *ngIf="showSubmitButton === true"
+      (click)="onSubmitButton(formObject)"
+    >
+      Submit
+    </button>
+    <button class="cancel" (click)="onCancelSubmitButton()">
+      <div class="cross"></div>
+    </button>
+  </div>
+
+  <!-- realtime fixedtime buttons -->
+  <div
+    class="playPause-buttons--flex"
+    *ngIf="showSubmitPanel === false && !processingUserRequest"
+  >
+    <ng-container *ngIf="!realtimeUpdateOn; else pauseButton">
+      <button
+        class="playButton"
+        #playButton
+        (click)="onResumeButton()"
+        [disabled]="processingUserRequest"
+      >
+        fixed time
+        <div class="onHover">resume</div>
+      </button>
+    </ng-container>
+
+    <ng-template #pauseButton>
+      <button
+        class="pauseButton"
+        (click)="onPauseButton()"
+        [disabled]="processingUserRequest"
+      >
+        real time
+        <div class="onHover">pause</div>
+      </button>
+    </ng-template>
+  </div>
+
+  <!-- loading history -->
+  <div class="recv loadingHistory" *ngIf="processingUserRequest">
+    <button class="cancel" (click)="onKillHistory()">
+      <div class="cross"></div>
+    </button>
+    <p class="dots"><span>Fetching</span><br/><span>history ...</span></p>
+  </div>
+
+  <!-- rangeDiff input field -->
+  <div
+    class="rangeGroup range-diff"
+    ngModelGroup="rangeDiff"
+    #rangeDiffGroup="ngModelGroup"
+    [title]="hoverInfoService.rangeDiffInfo"
+    [ngClass]="{
+      disabled: !realtimeUpdateOn || processingUserRequest,
+      enabled: realtimeUpdateOn && !processingUserRequest
+    }"
+  >
+    <div class="disabledOverlay" [title]="hoverInfoService.rangeDiffInfo"></div>
+    <input
+      [disabled]="!realtimeUpdateOn || processingUserRequest"
+      autocomplete="off"
+      [ngModel]="rangeDiff | epochnumberToTimestring"
+      name="timediff"
+      appControlValidator
+      #rdiffInput="ngModel"
+      [appAutoStretchInput]="rdiffInput"
+      [autoStretchCharWidth]="0.6"
+      [autoStretchPadding]="0.4"
+      (ngModelChange)="onControlInput(rdiffInput)"
+    />
+  </div>
+
+  <!-- rangeEnd input field -->
+  <div
+    class="rangeGroup range-end"
+    ngModelGroup="rangeEnd"
+    #rangeEndGroup="ngModelGroup"
+    [title]="hoverInfoService.rangeEndInfo"
+    [ngClass]="{
+      disabled: realtimeUpdateOn || processingUserRequest,
+      enabled: !realtimeUpdateOn && !processingUserRequest
+    }"
+  >
+    <div class="disabledOverlay" [title]="hoverInfoService.rangeEndInfo"></div>
+    <!-- hidding useless mozzila cancel buttons of input: -->
+    <div
+      class="hiddenCancelButtons"
+      *ngIf="currentBrowserService.browser === 'mozzila'"
+    ></div>
+
+    <input
+      class="range-end--date"
+      type="date"
+      min="1900-01-01"
+      max="2300-01-01"
+      [ngModel]="rangeEnd | dateFromEpochnumber"
+      name="date"
+      appControlValidator
+      #rend_date="ngModel"
+      (ngModelChange)="onControlInput(rend_date)"
+    />
+    <input
+      class="range-end--time"
+      type="time"
+      [ngModel]="rangeEnd | timeFromEpochnumber: this.clockUpdateRate"
+      name="time"
+      appControlValidator
+      [step]="clockUpdateRate === 'fast' ? '0.001' : '1'"
+      #rend_time="ngModel"
+      (ngModelChange)="onControlInput(rend_time)"
+    />
+  </div>
+
+  <!-- noData error -->
+  <div
+    class="noDataError"
+    [@popUp]="'created'"
+    *ngIf="this.receivedDiff === 0 && !processingUserRequest"
+  >
+    no data available
+  </div>
+
+  <!-- received information -->
+  <div
+    class="recv recv-pastDelay"
+    [ngClass]="{ delay: receivedStart < 0 }"
+    [title]="hoverInfoService.recvPastDelay"
+  >
+    {{ receivedStart | receivedDelay: this.clockUpdateRate }}
+  </div>
+  <div class="recv recv-diff" [title]="hoverInfoService.recvDiff">
+    {{ receivedDiff | receivedTimestring: this.clockUpdateRate }}
+  </div>
+  <div class="recv recv-count" [title]="hoverInfoService.recvCount">
+    #{{ receivedCount }}
+  </div>
+  <div
+    class="recv recv-presentDelay"
+    [ngClass]="{ delay: receivedEnd < 0 }"
+    [title]="hoverInfoService.recvPresentDelay"
+  >
+    {{ receivedEnd | receivedDelay: this.clockUpdateRate }}
+  </div>
+</form>

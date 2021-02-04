@@ -15,6 +15,11 @@
         "unit": "C"
     },
     {
+        "name": "Ufo Position",
+        "type": "position",
+        "unit": ""
+    },
+    {
         "name": "Outside Humidity",
         "type": "point",
         "unit": "%"
@@ -33,5 +38,17 @@
         "name": "Winter Images",
         "type": "image",
         "unit": ""
+    },
+    {
+        "name": "Telescope Position",
+        "type": "position",
+        "unit": ""
+    },
+    {
+        "name": "My Position",
+        "type": "position",
+        "unit": ""
     }
+
+
 ]

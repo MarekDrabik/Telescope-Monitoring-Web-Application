@@ -1,0 +1,102 @@
+<main
+  class="tablePhrame"
+  *ngIf="displayedSources.length !== 0"
+  [ngClass]="{
+    realTime: realtimeUpdateOn,
+    fixedTime: !realtimeUpdateOn
+  }"
+>
+  <div
+    class="tableContainer--overflow"
+    [ngClass]="{
+      mozzilaBrowserStyling: currentBrowserService.browser === 'mozzila'
+    }"
+  >
+    <ng-container
+      *ngIf="currentBrowserService.browser !== 'mozzila'; else mozzilaTemplate"
+    >
+      <table>
+        <tr
+          class="telemetry"
+          *ngFor="let point of telemetry; trackBy: trackByFun"
+        >
+          <td class="date">
+            <div>{{ point[0] | dateFromEpochnumber }}</div>
+          </td>
+          <td class="time">
+            <div>{{ point[0] | timeFromEpochnumber:'fast' }}</div>
+          </td>
+          <td *ngFor="let source of displayedSources; let i = index">
+            <div>{{ getValue(point, source) }}</div>
+          </td>
+        </tr>
+        <tr class="sourceNames" #header>
+          <td class="date"><div class="headerCellContent">Date</div></td>
+          <td class="time"><div class="headerCellContent">Time</div></td>
+          <td *ngFor="let source of displayedSources">
+            <div class="headerCellContent">
+              {{ unitsOfSources[source] }}
+            </div>
+          </td>
+        </tr>
+      </table>
+    </ng-container>
+    <!-- mozzila has column-reverse bug which makes whole table buggy, so here is a rebuilt: -->
+    <ng-template #mozzilaTemplate>
+      <table>
+        <tr class="sourceNames" #header>
+          <td class="date mozzilaBrowserStyling">
+            <div class="headerCellContent">Date</div>
+          </td>
+          <td class="time mozzilaBrowserStyling">
+            <div class="headerCellContent">Time</div>
+          </td>
+          <td
+            *ngFor="let source of displayedSources"
+            class="mozzilaBrowserStyling"
+          >
+            <div class="headerCellContent">
+              {{ unitsOfSources[source] }}
+            </div>
+          </td>
+        </tr>
+        <tr
+          class="telemetry"
+          *ngFor="let point of telemetry; trackBy: trackByFun"
+        >
+          <td class="date">
+            <div>{{ point[0] | dateFromEpochnumber }}</div>
+          </td>
+          <td class="time">
+            <div>{{ point[0] | timeFromEpochnumber:'fast' }}</div>
+          </td>
+          <td *ngFor="let source of displayedSources; let i = index">
+            <div>{{ getValue(point, source) }}</div>
+          </td>
+        </tr>
+      </table>
+    </ng-template>
+  </div>
+  <app-control-panel
+    [realtimeUpdateOn]="realtimeUpdateOn"
+    (resumeButton)="onControlPanelResumeButton()"
+    (pauseButton)="onControlPanelPauseButton()"
+    (submitButton)="onControlPanelSubmitButton($event)"
+    [rangeDiff]="controlPanelRangeDiff"
+    [rangeEnd]="controlPanelRangeEnd"
+    [telemetryUpdate$]="telemetryCache.telemetryUpdate$"
+    [processingUserRequest]="processingUserRequest"
+    [clockUpdateRate]="clockUpdateRate"
+    (killHistory)="killHistoryRetrieval()"
+    [ngClass]="{'mozzilaControlPanel': currentBrowserService.browser === 'mozzila'}"
+  ></app-control-panel>
+</main>
+
+<ng-content></ng-content>
+
+<div *ngIf="displayedSources.length === 0" class="noSources">
+  <b>Table Applet</b><br />
+  Nothing to display: no telemetry source of type 'point' or 'string' seems to
+  be available. <br />
+  (Sources to be registered in 'telemetry-settings.json' file on the server.)
+</div>

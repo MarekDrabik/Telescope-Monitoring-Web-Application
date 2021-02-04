@@ -1,7 +1,7 @@
 {
   "name": "balon-projekt-server",
   "version": "0.0.0",
-  "description": "public server for balonMonitoring app",
+  "description": "localhost server for balonMonitoring app developement phase",
   "main": "app/app.js",
   "dependencies": {
     "bcrypt": "^5.0.0",
@@ -12,7 +12,7 @@
     "express": "^4.17.1",
     "https": "^1.0.0",
     "jsonwebtoken": "^8.5.1",
-    "morgan": "^1.10.0",
+    "cors": "^2.8.5",
     "mysql2": "^2.1.0",
     "sequelize": "^6.3.3",
     "ws": "^7.3.1"

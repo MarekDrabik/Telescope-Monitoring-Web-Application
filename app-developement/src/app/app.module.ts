@@ -1,24 +1,26 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { AppComponent } from './app.component';
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LayoutModule } from './layout/layout.module';
 import { Route, RouterModule } from '@angular/router';
-import { AuthModule } from './auth/auth.module';
+import { AppComponent } from './app.component';
 import { AuthComponent } from './auth/auth.component';
-import { LayoutComponent } from './layout/layout/layout.component';
-import { AuthGuard } from './auth/auth.guard';
+import { AuthModule } from './auth/auth.module';
+import { AuthGuard } from './auth/guards/auth.guard';
+import { LocalhostAppGuard } from './auth/guards/localhost-app.guard';
+import { WorkspaceComponent } from './workspace/workspace.component';
+import { WorkspaceModule } from './workspace/workspace.module';
 
 
 const routes: Route[] = [
   {
     path: 'app',
-    component: LayoutComponent,
+    component: WorkspaceComponent,
     canActivate: [AuthGuard],
   },
   {
     path: 'auth',
     component: AuthComponent,
+    canActivate: [LocalhostAppGuard],
   },
   {
     path: '**',
@@ -29,13 +31,13 @@ const routes: Route[] = [
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),
     BrowserModule,
     BrowserAnimationsModule,
-    LayoutModule,
+    WorkspaceModule,
     AuthModule
   ],
   providers: [],

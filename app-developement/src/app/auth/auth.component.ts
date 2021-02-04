@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { HttpService } from "../services/http.service";
+import { Subscription } from "rxjs";
+import { HttpService } from "../shared/services/http.service";
+import { UnsubscriptionService } from "../shared/services/unsubscription.service";
 
 @Component({
   selector: "app-auth",
@@ -10,7 +12,12 @@ import { HttpService } from "../services/http.service";
 export class AuthComponent implements OnInit {
   isLoading = false;
   error: string = null;
-  constructor(private httpService: HttpService, private router: Router) {}
+  constructor(
+    private httpService: HttpService,
+    private router: Router,
+    private unsubService: UnsubscriptionService
+  ) {}
+  private _sub: Subscription;
 
   ngOnInit() {}
 
@@ -20,7 +27,6 @@ export class AuthComponent implements OnInit {
       (response) => {
         if (response.status == 202) {
           this.router.navigate(["/app"]);
-          // this.isLoading = false;
         }
       },
       (error) => {
@@ -32,8 +38,11 @@ export class AuthComponent implements OnInit {
         this.isLoading = false;
       },
       () => {
-        // this.isLoading = false;
       }
     );
+  }
+
+  ngOnDestroy(): void {
+    this.unsubService.unsubscribe(this._sub);
   }
 }

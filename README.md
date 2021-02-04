@@ -1,23 +1,27 @@
-# Telescope Monitoring (Angular 8)
+# Telescope Monitoring (Angular)
 
-<img align="right" src="/.doc/balonMonitoring.png" width="500"></img>
-Táto webová aplikácia slúži na zobrazovanie číselnej a obrázkovej telemetrie v reálnom čase.
+<img align="right" src="/.doc/telescopeMonitoring2.png" width="500"></img>
+Webová aplikácia, ktorá slúži na zobrazovanie telemetrie vzdialeného zariadenia v reálnom čase.
 
-Aplikáciu vytváram na žiadosť môjho známeho, ktorý pracuje na projekte spoločnosti NASA.
-Projektom je teleskop, ktorý bude uskutočňovať merania a pozorovania na okraji zemskej atmosféry. <br>
-V tomto projekte má moja aplikácia prevziať hlavnú úlohu pri zobrazovaní telemetrie a vzdialenom nastavovaní zariadenia.
-
-Aplikácia je v momentálne stave už použiteľná a jej základné funkcie sú k dispozícii:
-* zobrazovanie číselnej telemetrie v interaktívnom grafe alebo v tabuľke
+**Jej základné funkcie sú:**
+* zobrazovanie číselnej telemetrie v grafe a v tabuľke
 * zobrazovanie obrázkovej telemetrie
-* nastaviteľný časový rozsah zobrazených dát a ľubovoľný náhľad do histórie
+* zobrazovanie pozície v mape
 * zasielanie príkazov na meracie zariadenie
+* ľubovoľne nastaviteľný časový rozsah zobrazenia a náhľad do histórie meraní
 
-Aplikácia je flexibilná a nastaviteľná podľa vkusu užívateľa. Všetky okná je možné ľubovoľne presúvať a meniť ich veľkosť. 
-Je možné vytvoriť viacero okien, ktoré zobrazia jeden alebo viacero zdrojov telemetrie. Posledné nastavenia užívateľa sú uložené 
+Aplikácia je nastaviteľná podľa potrieb užívateľa. Všetky okná je možné ľubovoľne presúvať a meniť ich veľkosť. 
+Je možné vytvoriť viacero okien, ktoré zobrazia jeden alebo viac zdrojov telemetrie. Posledné nastavenia užívateľa sú uložené 
 vo webovom prehliadači, a preto je možné aplikáciu vypnúť bez straty nastavenia.
 
-## Viac o NASA projekte
+## Motivácia
+
+Aplikáciu som vytvoril na žiadosť môjho známeho, ktorý pracuje na projekte spoločnosti NASA.
+Projektom je teleskop, ktorý bude uskutočňovať merania a pozorovania na okraji zemskej atmosféry. <br>
+Moja aplikácia je uceleným riešením pozorovania všetkých druhov dát, ktoré toto zariadenie produkuje. <br>
+Projekt sa, žiaľ, oneskoruje kvôli pandemickej kríze. Preto táto aplikácia ešte nebola použitá v reálnych podmienkach.
+
+<ins>**Viac o NASA projekte:**</ins><br>
 **web:** https://techport.nasa.gov/view/94313 <br>
 **kontaktná osoba:** Viliam Klein, viliam.klein@gmail.com, +1 303-827-6422
 
@@ -36,16 +40,17 @@ visitor
 ```
 
 **Stručný návod:**<br>
-<img align="center" src="/.doc/navod1.png" width="600"></img>
+<img align="center" src="/.doc/navod.png" width="600"></img>
 
 
 
 ## Použité technológie
-* Angular 8, RxJS, Typescript, Node.js, SCSS
-* interaktívne grafy sú vytvorené pomocou open source balíka [Dygraphs](http://dygraphs.com/)
+* Angular 8, Node.js, MySQL
+* mapy sú vytvorené pomocou balíkov [Leaflet](https://leafletjs.com/) a [OpenStreetMap](https://www.openstreetmap.org)
+* grafy sú vytvorené pomocou balíka [Dygraphs](http://dygraphs.com/)
 
 ## Github Repository
-V tomto repository nájdete kód celého projektu:
+V tomto repozitári nájdete kód celého projektu:
 * [app-developement](https://github.com/MarekDrabik/TelescopeMonitoring/tree/master/app-developement) - kód aplikácie pred kompiláciou
-* [server-public](https://github.com/MarekDrabik/TelescopeMonitoring/tree/master/server-public/app) - kód veréjneho servera, ktorý slúži ako webový server (poskytuje samotnú aplikáciu) a zároveň ako dátový server (zasiela telemetrické dáta užívateľom)
+* [server-public](https://github.com/MarekDrabik/TelescopeMonitoring/tree/master/server-public/app) - kód veréjneho servera, ktorý slúži ako webový server (poskytuje samotnú aplikáciu), a zároveň ako dátový server (zasiela telemetrické dáta užívateľom)
 

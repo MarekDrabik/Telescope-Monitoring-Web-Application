@@ -1,0 +1,36 @@
+<main class="phrame" *ngIf="displayedSources.length !== 0">
+  <app-focused-image
+    class="focusedImageWindow"
+    [newestPoint]="newestTelemetryPoint"
+  ></app-focused-image>
+
+  <app-timeline
+    class="timeline"
+    [thumbnails]="telemetryReversed"
+    [@timelineCollapse]="timelineCollapsed"
+  ></app-timeline>
+
+  <app-control-panel
+    (latestRestrictions)="onLatestRestrictions($event)"
+    [realtimeUpdateOn]="realtimeUpdateOn"
+    (resumeButton)="onControlPanelResumeButton(); resetToAutoFocusNewestImage()"
+    (pauseButton)="onControlPanelPauseButton(); resetToAutoFocusNewestImage()"
+    (submitButton)="onControlPanelSubmitButton($event);
+      resetToAutoFocusNewestImage()"
+    [rangeDiff]="controlPanelRangeDiff"
+    [rangeEnd]="controlPanelRangeEnd"
+    [telemetryUpdate$]="telemetryCache.telemetryUpdate$"
+    [processingUserRequest]="processingUserRequest"
+    [clockUpdateRate]="clockUpdateRate"
+    (killHistory)="killHistoryRetrieval()"
+    [ngClass]="{'mozzilaControlPanel': currentBrowserService.browser === 'mozzila'}"
+  ></app-control-panel>
+</main>
+<ng-content></ng-content>
+
+<div *ngIf="displayedSources.length === 0" class="noSources">
+  <b>Imagery Applet</b><br />
+  Nothing to display: no telemetry source of type 'image' seems to be available.
+  <br />
+  (Sources to be registered in 'telemetry-settings.json' file on the server.)
+</div>

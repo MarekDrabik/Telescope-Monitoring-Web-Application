@@ -35,12 +35,10 @@ const privateKey = fs.readFileSync(__dirname + '/encryption/key.pem', 'utf-8');
 const certificate = fs.readFileSync(__dirname + '/encryption/cert.pem', 'utf-8');
 const passphrase = config.get('passphrase');
 const port = config.get('port');
-//app.use(morgan('combined'));
 
 //start generating fake telemetry and notify telemetryReceiver on every point
 shared.initializeImages()
 spacecraft.startGenerating(spacecraftEndpoint.onMeasurementsReceived)
-//port = 5000;
 
 app.use(cookieParser());
 app.use(bodyParser.json())
@@ -55,14 +53,13 @@ app.use('/', (req, res, next) => {
 
 app.use('/auth', authRouter);
 
-//app.use('/', checkIsAuthenticated) //any request appart of /auth POST
 app.use('/settings', authentication.checkIsAuthenticated, (req, res, next) => {
   res.send(telemetryModel.getTelemetrySettings())
 })
 app.use('/command', authentication.checkIsAuthenticated, commandRoute)
 app.use('/history', authentication.checkIsAuthenticated, historyRoute)
 app.use((req, res, next) => {
-  res.redirect(301, '/index.html') //on not-found, redirect to app
+  res.redirect('/index.html');
 })
 
 sequelize.sync().then(result => {
@@ -74,10 +71,9 @@ sequelize.sync().then(result => {
     cert: certificate,
     passphrase: passphrase
   };
-  const httpsServer = https.createServer(sslOptions, app).listen(httpsPort, () => {console.log(`Https webserver for BALON MONITORING on port: ${httpsPort}, mapped to 5444 on router.`)});
+  const httpsServer = https.createServer(sslOptions, app).listen(httpsPort, () => {console.log(`Https webserver for TELESCOPE MONITORING on port: ${httpsPort}, mapped to 5444 on router.`)});
 
   realtimeServer.listenOn(httpsServer)
-
 })
 .catch(err => {
   console.log("seq sync error", err)

@@ -10,19 +10,15 @@ module.exports = class SpacecraftServer {
     webSocketServer.on('connection', (ws, req) => { // ws = websocket created, req = request from client
 
       ws.on('message', (message) => {
-        var messageObj = JSON.parse(message)
-        // console.log("Spacecraft message received: ", message)
-        if (!this._validMessage(messageObj)) { //implement if needed at the bottom
-          console.error('Invalid message from spacecraft.')
-          return
-        }
-        this._processMessage(messageObj, ws) //implement (update database)
+        let messageObj; //dummy before JSON parse
+        // var messageObj = JSON.parse(message)
+        console.log("Spacecraft message received: ", message)
         
         //reply with a command if available
         let lastUserCommand = CommandController.lastUserCommand;
         CommandController.lastUserCommand = null; //reset so that we dont repeat commands
         if(lastUserCommand) ws.send(lastUserCommand)  
-    })
+      })
       
       ws.on('close', (code, reason) => {
         console.log('Spacecraft connection closed: code, reason', code, ", ", reason)
@@ -32,19 +28,6 @@ module.exports = class SpacecraftServer {
         console.error('error on spacecraft server socket: ', socket, error)
       })
     })
-  }
-
-
-  _validMessage(messageObj) {
-    // if (messageObj.hasOwnProperty('subscribe')) {
-    //   return true
-    // }
-    // return false
-    return true
-  }
-
-  _processMessage(messageObj, ws) {
-    return
   }
 
 }

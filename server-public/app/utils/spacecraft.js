@@ -1,11 +1,13 @@
 const telemetryModel = require('../models/telemetry.model')
 const RealisticDataGenerator = require('../utils/realisticDataGenerator')
 const ImageGenerator = require('../utils/imageGenerator')
+const PositionGenerator = require('../utils/positionGenerator')
 
 //generates random measurement data based on telemetry-settings.json
 class Spacecraft {
 
   static valueGenerator;
+  static UPDATE_PERIOD = 2000;
 
   constructor() {    
     //assign generator by telemetry name (if defined for that specific name), otherwise by telemetry type
@@ -15,9 +17,12 @@ class Spacecraft {
     let outsideHumidityGenerator = new RealisticDataGenerator(20, 90, 60, 30)
     let engineTemperatureGenerator = new RealisticDataGenerator(90, 99, 5, 3)
     let winterImageGenerator = new ImageGenerator('Winter Images')
+    let telescopePositionGenerator = new PositionGenerator(Spacecraft.UPDATE_PERIOD, [40.1, -105], 30)
+    let ufoPositionGenerator = new PositionGenerator(Spacecraft.UPDATE_PERIOD, [40.12, -105.2], 100)
 
     let defaultPointGenerator = new RealisticDataGenerator(10, 50, 40, 20)
     let defaultImageGenerator = new ImageGenerator()
+    let defaultPositionGenerator = new PositionGenerator(Spacecraft.UPDATE_PERIOD, [40.086311576895824, -105.51154785139617])
     Spacecraft.valueGenerator = {
       'Engine Current': engineCurrentGenerator.generate,
       'Battery Current': batteryCurrentGenerator.generate,
@@ -25,8 +30,12 @@ class Spacecraft {
       "Outside Humidity": outsideHumidityGenerator.generate,
       "Engine Temperature": engineTemperatureGenerator.generate,
       "Winter Images": winterImageGenerator.generate,
+      "Telescope Position": telescopePositionGenerator.generate,
+      "Ufo Position": ufoPositionGenerator.generate,
+
       'point': defaultPointGenerator.generate,
-      'image': defaultImageGenerator.generate
+      'image': defaultImageGenerator.generate,
+      'position': defaultPositionGenerator.generate
     }
   }
   
@@ -46,7 +55,7 @@ class Spacecraft {
       }
       //currentMeasurements: {timestamp: 1231452, 'starsImage': buffer, 'batCurrent': 123 ...}
       callback(currentMeasurements) //callback by database
-    }, 2000)
+    }, Spacecraft.UPDATE_PERIOD)
   }
   
   _generatorFunction (telemetryType, telemetrySourceName) {

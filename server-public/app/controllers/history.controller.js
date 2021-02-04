@@ -5,24 +5,16 @@ function getTelemetry (req, res, next) {
     // parameters validity is checked at this point
     _extractStartEndTimestamps(req.query)
         .then(([start, end]) => {
-            if (req.query.source === 'allPoints') {
+            if (['allPoints', 'allPositions'].includes(req.query.source)) {
                 console.log("quering database for allpoints")
-                telemetrySeqModel.retrieveAllPointsByStartEnd(start, end)
+                telemetrySeqModel.retrieveTelemetryGroupByStartEnd(req.query.source, start, end)
                     .then(timestampsValues => {
-                        // setTimeout(() => {
-                        //     res.status(201);
-                        //     res.send(timestampsValues)  
-                        // },20000)
                         res.status(201);
                         res.send(timestampsValues)            
                     })
             } else {
                 telemetrySeqModel.retrieveSourceByStartEnd(req.query.source, start, end)
                     .then(timestampsValues => {
-                        // setTimeout(() => {
-                        //     res.status(201);
-                        //     res.send(timestampsValues)  
-                        // },20000)
                         res.status(201);
                         res.send(timestampsValues)            
                     })
@@ -42,7 +34,6 @@ function getTimestamps(req, res, next) {
     _extractStartEndTimestamps(req.query)
         .then(([start, end]) => telemetrySeqModel.retrieveTimestampsByStartEnd(start, end))
         .then(timestamps => {
-            // console.log("timestamps of requested window:", timestamps)
             res.status(201)
             res.send(timestamps)
         })   

@@ -1,0 +1,149 @@
+@import "shared.scss";
+
+.dygraphs-chart-container {
+  position: relative; //for zoomTrackerFrame positioning
+  width: 100%;
+  height: 100%;
+}
+.dygraph-legend {
+  background-color: rgba(250, 250, 250, 0.938);
+  position: absolute;
+  width: fit-content !important;
+  max-width: 80%;
+  left: 65px !important;
+  font-weight: normal; //date and time
+  color: $phramesColorDarkened;
+
+  span {
+    //sourcenames and values
+    font-weight: normal;
+    color: $greenDarkest;
+  }
+}
+
+.zoomInformation {
+  position: absolute;
+  color: black;
+  background-color: $submenuHoverColor;
+  font-size: 1.1rem;
+  font-stretch: wider;
+  left: 70px;
+  top: -1.1rem;
+}
+
+.verticalRangeSelector--container {
+  //just a form
+  position: static;
+
+  .upperSelector--container,
+  .lowerSelector--container {
+    opacity: 0;
+    position: absolute;
+    z-index: 1;
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $focusColor;
+    right: 10%;
+
+    input {
+      width: 5rem;
+      height: 100%;
+      color: black;
+      background-color: transparent;
+      font-family: monospace;
+      border: none;
+    }
+    input.mozzilaStyling {
+      height: 160%;
+      box-shadow: none;
+    }
+
+    input:hover,
+    input:focus {
+      font-weight: bolder;
+    }
+
+    .refresh {
+      width: $unitHeight;
+      height: 100%;
+      background-image: url("../../../../assets/icons/applets/refresh_black.png");
+      background-repeat: no-repeat;
+      background-size: contain;
+      cursor: pointer;
+      margin-right: 3px;
+      opacity: 1;
+    }
+    .refresh:hover {
+      opacity: 1;
+      background-image: url("../../../../assets/icons/applets/refresh_white.png");
+    }
+  }
+  .upperSelector--container {
+    bottom: calc(100%);
+    padding-bottom: 0px;
+  }
+  .lowerSelector--container {
+    top: calc(100% - 45px);
+    padding-top: 0px;
+  }
+}
+
+.zoomTrackerFrame {
+  //general
+  position: absolute;
+  top: 0px;
+  bottom: 45px;
+  left: 57px;
+  right: 5px;
+  z-index: -1; //to not block dygraph interactivity
+  > * {
+    position: absolute;
+  }
+}
+
+.zoomTrackerFrame {
+  //graphics
+  $framThickness: 20px;
+
+  .top,
+  .right,
+  .bottom,
+  .left {
+    opacity: 0;
+  }
+
+  .top {
+    top: 0;
+    right: 0;
+    left: 0;
+    height: $framThickness;
+    background: linear-gradient(to bottom, $focusColor, transparent);
+  }
+  .bottom {
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: $framThickness;
+    background: linear-gradient(to top, $focusColor, transparent);
+  }
+  .right {
+    right: 0;
+    bottom: 0;
+    top: 0;
+    width: $framThickness;
+    background: linear-gradient(to left, $focusColor, transparent);
+  }
+  .left {
+    left: 0;
+    bottom: 0;
+    top: 0;
+    width: $framThickness;
+    background: linear-gradient(to right, $focusColor, transparent);
+  }
+}
+
+.visibleElement {
+  opacity: 1 !important;
+}

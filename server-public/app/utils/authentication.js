@@ -12,7 +12,6 @@ const checkIsAuthenticated = function (req, res, next) {
    	return;
    }
    res.status(401).send(); // unauthorized
-   //res.redirect(301, '/index.html')
    return;
 }
 

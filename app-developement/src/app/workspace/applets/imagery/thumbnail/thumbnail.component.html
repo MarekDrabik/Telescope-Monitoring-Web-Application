@@ -1,0 +1,11 @@
+<div
+  class="container"
+  [ngClass]="{ selected: selected }"
+  (click)="onClick($event)"
+>
+  <img class="image" [src]="imageUrl" />
+  <div class="timestamp">
+    <span>{{ datePart }}</span>
+    <span>{{ timePart }}</span>
+  </div>
+</div>

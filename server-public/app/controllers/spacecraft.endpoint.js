@@ -10,7 +10,6 @@ class SpacecraftEndpoint {
     // store data in database:
     TelemetrySeqModel.create(currentMeasurements)
       .then((results) => {
-        // console.log('RES',results)
       })
       .catch(err => {
         console.log(err)

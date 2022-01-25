@@ -1,19 +1,46 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { AppComponent } from './app.component';
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LayoutModule } from './layout/layout.module';
+import { Route, RouterModule } from '@angular/router';
+import { AppComponent } from './app.component';
+import { AuthComponent } from './auth/auth.component';
+import { AuthModule } from './auth/auth.module';
+import { AuthGuard } from './auth/guards/auth.guard';
+import { LocalhostAppGuard } from './auth/guards/localhost-app.guard';
+import { WorkspaceComponent } from './workspace/workspace.component';
+import { WorkspaceModule } from './workspace/workspace.module';
+
+
+const routes: Route[] = [
+  {
+    path: 'app',
+    component: WorkspaceComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'auth',
+    component: AuthComponent,
+    canActivate: [LocalhostAppGuard],
+  },
+  {
+    path: '**',
+    redirectTo: '/app',
+    pathMatch: 'full',
+  }
+]
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
+    RouterModule.forRoot(routes),
     BrowserModule,
     BrowserAnimationsModule,
-    LayoutModule
+    WorkspaceModule,
+    AuthModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

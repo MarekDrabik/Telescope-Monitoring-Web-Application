@@ -1,0 +1,34 @@
+<main class="phrame"
+  *ngIf="displayedSources.length !== 0"
+  >
+
+  <app-leaflet-map
+    [windowResize$]="windowResize$"
+    [telemetryCache]="telemetryCache"
+    [displayedSources]="displayedSources"
+  ></app-leaflet-map>
+
+  <app-control-panel
+    [realtimeUpdateOn]="realtimeUpdateOn"
+    (resumeButton)="onControlPanelResumeButton()"
+    (pauseButton)="onControlPanelPauseButton()"
+    (submitButton)="onControlPanelSubmitButton($event)"
+    [rangeDiff]="controlPanelRangeDiff"
+    [rangeEnd]="controlPanelRangeEnd"
+    [telemetryUpdate$]="telemetryCache.telemetryUpdate$"
+    [processingUserRequest]="processingUserRequest"
+    [clockUpdateRate]="clockUpdateRate"
+    (killHistory)="killHistoryRetrieval()"
+    [ngClass]="{'mozzilaControlPanel': currentBrowserService.browser === 'mozzila'}"
+  ></app-control-panel>
+
+</main>
+<ng-content></ng-content>
+
+<div *ngIf="displayedSources.length === 0"
+  class="noSources"
+>
+  <b>Map Applet</b><br>
+  Nothing to display: no telemetry source of type 'coordinates' seems to be available. <br>
+  (Sources to be registered in 'telemetry-settings.json' file on the server.)
+</div>

@@ -1,0 +1,24 @@
+<main>
+  <form
+    autocomplete="on"
+    *ngIf="!isLoading"
+    #form="ngForm"
+    (ngSubmit)="onSubmit(form)"
+  >
+    <label for="name">Name</label>
+    <input type="text-field" ngModel name="name" autocomplete="on" required />
+    <label for="password">Password</label>
+    <input
+      type="password"
+      ngModel
+      name="password"
+      id="pass"
+      autocomplete="on"
+      required
+    />
+    <br />
+    <button type="submit" name="btn" [disabled]="!form.valid">Submit</button>
+  </form>
+  <div *ngIf="!isLoading && error" class="error">{{ error }}</div>
+  <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+</main>

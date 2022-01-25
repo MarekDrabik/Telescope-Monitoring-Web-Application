@@ -1,0 +1,30 @@
+<main *ngIf="displayedSources.length !== 0" #graph class="graphPhrame">
+  <app-dygraphs
+    [updateDygraphSubject]="updateDygraphSubject"
+    [ngClass]="{ mozzilaStyling: currentBrowserService.browser === 'mozzila' }"
+  ></app-dygraphs>
+
+  <app-control-panel
+    [realtimeUpdateOn]="realtimeUpdateOn"
+    (resumeButton)="onControlPanelResumeButton(); unzoomGraphHorizontally()"
+    (pauseButton)="onControlPanelPauseButton()"
+    (submitButton)="
+      onControlPanelSubmitButton($event); unzoomGraphHorizontally()
+    "
+    [rangeDiff]="controlPanelRangeDiff"
+    [rangeEnd]="controlPanelRangeEnd"
+    [telemetryUpdate$]="telemetryCache.telemetryUpdate$"
+    [processingUserRequest]="processingUserRequest"
+    [clockUpdateRate]="clockUpdateRate"
+    (killHistory)="killHistoryRetrieval()"
+    [ngClass]="{'mozzilaControlPanel': currentBrowserService.browser === 'mozzila'}"
+  ></app-control-panel>
+</main>
+<ng-content></ng-content>
+
+<div *ngIf="displayedSources.length === 0" class="noSources">
+  <b>Graph Applet</b><br />
+  Nothing to display: no telemetry source of type 'point' seems to be available.
+  <br />
+  (Sources to be registered in 'telemetry-settings.json' file on the server.)
+</div>

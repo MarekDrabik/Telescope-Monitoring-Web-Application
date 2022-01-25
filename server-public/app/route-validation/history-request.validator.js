@@ -6,7 +6,7 @@ const historyRequestModel = require ('../models/history-request.model.js.js')
 paramSpecificValidators = {
     source: [
         function checkSourceNameIsRegistered(param) {
-            if (!telemetryModel.getAllSourceNames().includes(param) && !param==='allPoints') {
+            if (!telemetryModel.getAllRequestableSources().includes(param)) {
                 console.log('Invalid request: Invalid query "source": ', param, ". Source uknown.");
                 return false;
             }

@@ -1,0 +1,35 @@
+* {
+  box-sizing: border-box;
+}
+
+.phrame {
+  width: 100%;
+  height: 100%;
+  // display: flex; //there was a <img> always growing height bug with flex
+  // flex-direction: column;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 1fr auto auto;
+  grid-template-areas:
+    "focused-image"
+    "timeline"
+    "control-panel";
+
+  app-focused-image {
+    grid-area: focused-image;
+  }
+  app-timeline {
+    grid-area: timeline;
+  }
+  app-control-panel {
+    grid-area: control-panel;
+  }
+}
+
+.noSources {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(238, 187, 187);
+  text-align: center;
+}

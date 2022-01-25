@@ -1,16 +1,16 @@
 
 module.exports = class RealisticDataGenerator {
     
-    G0; G1; Y;
+    GLOBAL_LOWER_LIMIT; GLOBAL_UPPER_LIMIT; Y;
     L0; L1;
     globalDisruptionRate; // number between 0 - 100 which specifies how often should global trend change, 0 means every time
     globalDisruptionRate_count = 0;
     localDisruptionRate;
     localDisruptionRate_count = 0; // number between 0 - 100 which specifies how often should local trend change, 0 means every time
 
-    constructor (G0, G1, globalDisruptionRate, localDisruptionRate) {
-        this.G0 = G0;
-        this.G1 = G1;
+    constructor (GLOBAL_LOWER_LIMIT, GLOBAL_UPPER_LIMIT, globalDisruptionRate, localDisruptionRate) {
+        this.GLOBAL_LOWER_LIMIT = GLOBAL_LOWER_LIMIT;
+        this.GLOBAL_UPPER_LIMIT = GLOBAL_UPPER_LIMIT;
         if (globalDisruptionRate < 0 || globalDisruptionRate > 100) {
             console.error('globalDisruptionRate is suppose to be in interaval 0 - 100.')
         }
@@ -21,7 +21,7 @@ module.exports = class RealisticDataGenerator {
         }
         this.localDisruptionRate = localDisruptionRate;
         // generate initial global trend value Y
-        this.Y = this._generateValueBetween(this.G0, this.G1)
+        this.Y = this._generateValueBetween(this.GLOBAL_LOWER_LIMIT, this.GLOBAL_UPPER_LIMIT)
         // generate initial local interval
         this._generateNewLocalInterval()
     }
@@ -29,7 +29,7 @@ module.exports = class RealisticDataGenerator {
     generate = () => {
         // generate new global trend value Y if the time has come:
         if (this.globalDisruptionRate_count === this.globalDisruptionRate) {
-            this.Y = this._generateValueBetween(this.G0, this.G1)
+            this.Y = this._generateValueBetween(this.GLOBAL_LOWER_LIMIT, this.GLOBAL_UPPER_LIMIT)
             this.globalDisruptionRate_count = 0; //reset counter
         } else {
             this.globalDisruptionRate_count ++;
@@ -51,7 +51,7 @@ module.exports = class RealisticDataGenerator {
         //local interval is interval which both boundaries values are in global interval
         let l0 = 0; let l1 = 0;
         //local interval can be max 2/3 of global interval size;
-        let localIntervalTemplate = this._normalizeInterval(this.G0, this.G1).map(v => v*2/3)
+        let localIntervalTemplate = this._normalizeInterval(this.GLOBAL_LOWER_LIMIT, this.GLOBAL_UPPER_LIMIT).map(v => v*2/3)
         // avoid 0 lenght interval
         while (l0 === l1) { 
             l0 = this._generateValueBetween(localIntervalTemplate[0], localIntervalTemplate[1]);

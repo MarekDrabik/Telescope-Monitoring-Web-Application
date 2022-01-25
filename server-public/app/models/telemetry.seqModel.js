@@ -4,23 +4,28 @@ const settings = require('../utils/settings')
 const sequelize = require('../utils/database')
 const shared = require ('../utils/shared')
 
-const tableName = 'newModel14';
+const tableName = 'newModel20';
 const seqTypes = {
     "MEDIUMBLOB": Sequelize.BLOB('medium'), //for real image
     "DOUBLE": Sequelize.DOUBLE,
-    "BIGINT": Sequelize.BIGINT
+    "BIGINT": Sequelize.BIGINT,
+    "JSON": Sequelize.JSON
 }
 
 //columns in database correspond to telemetry.model
-var columns = {}
-for (let tele of telemetryModel.getTelemetrySettings()){
-    //create separate schema for each different telemetry-settings.json
-    let colName = tele.name
-    let seqType = telemetryModel.getDatabaseType(tele.type)
-    columns[colName] = {type: seqTypes[seqType], allowNull: true}
+function getMainColumnsDefinition() {
+    var mainColumns = {}
+    for (let tele of telemetryModel.getTelemetrySettings()){
+        //create separate schema for each different telemetry-settings.json
+        let colName = tele.name
+        let seqType = telemetryModel.getDatabaseType(tele.type)
+        mainColumns[colName] = {type: seqTypes[seqType], allowNull: true}  
+    }  
+    return mainColumns;
 }
-const Telemetry = sequelize.define(
-    modelName = settings.imagesAreStoredAsIndexes ? tableName + '_imgAsInteger' : tableName + '_imgAsBlob',
+
+const MainTelemetry = sequelize.define(
+    modelName = settings.imagesAreStoredAsIndexes ? tableName + '_imgAsInt' : tableName + '_imgAsBlob',
     attributes={
         timestamp: {
             type: Sequelize.BIGINT,
@@ -28,11 +33,11 @@ const Telemetry = sequelize.define(
             allowNull: false,
             unique: true
         },
-        ...columns
+        ...getMainColumnsDefinition()
     }
 )
 
-Telemetry.retrieveSourceByStartEnd = function(reqSource, reqStart, reqEnd) {
+MainTelemetry.retrieveSourceByStartEnd = function(reqSource, reqStart, reqEnd) {
     // console.log("DB request start - end:", reqSource, reqStart, reqEnd)
     return this.findAll({
         attributes: ['timestamp', reqSource] ,
@@ -43,7 +48,7 @@ Telemetry.retrieveSourceByStartEnd = function(reqSource, reqStart, reqEnd) {
             }
         }})
     .then(arrayOfInstances => {
-        if (arrayOfInstances === []) {
+        if (arrayOfInstances.length === 0) {
             return []
         }
         else if (settings.imagesAreStoredAsIndexes && telemetryModel.getType(reqSource)==='image') {
@@ -64,11 +69,10 @@ Telemetry.retrieveSourceByStartEnd = function(reqSource, reqStart, reqEnd) {
     })
     .catch(err => console.error("DB error:", err))
 }
-Telemetry.retrieveAllPointsByStartEnd = function(reqStart, reqEnd) {
-    let allPoints = telemetryModel.getAllPointsFormat()
-    let attributes = [...allPoints]
+MainTelemetry.retrieveTelemetryGroupByStartEnd = function(telemetryGroupName, reqStart, reqEnd) {
+    let telemetryGroup = telemetryModel.getGroupFormat(telemetryGroupName)
     return this.findAll({
-        attributes: ['timestamp', ...allPoints] ,
+        attributes: ['timestamp', ...telemetryGroup] ,
         where: {
             'timestamp': {
                 [Sequelize.Op.gte]: reqStart,
@@ -76,23 +80,32 @@ Telemetry.retrieveAllPointsByStartEnd = function(reqStart, reqEnd) {
             }
         }})
     .then(arrayOfInstances => {
-        if (arrayOfInstances === []) {
+        if (arrayOfInstances.length === 0) {
             return []
         }
         else {
             //extracts results in a form: [[timestamp, value, value, value...], ...]
-            return arrayOfInstances.map(inst => {
+            const result = arrayOfInstances.map(inst => {
                 let returnArray = [];
                 returnArray[0]=inst.dataValues.timestamp
-                allPoints.forEach(sourceName => returnArray.push(inst.dataValues[sourceName]))
+                telemetryGroup.forEach(sourceName => {
+                    let value = inst.dataValues[sourceName];
+                    if (typeof(value) === 'string') {
+                        // case of JSON position format - horrible bug which was cause only by RPI server 
+                        value = JSON.parse(value);
+                    }
+                    returnArray.push(value)
+                })
                 return returnArray
             })
+            return result;
         }
     })
+    
     .catch(err => console.error("DB error:", err))
 }
 
-Telemetry.retrieveTimestampsByStartEnd = function(reqStart, reqEnd) {
+MainTelemetry.retrieveTimestampsByStartEnd = function(reqStart, reqEnd) {
     return this.findAll({
         attributes: ['timestamp'] ,
         where: {
@@ -102,7 +115,7 @@ Telemetry.retrieveTimestampsByStartEnd = function(reqStart, reqEnd) {
             }
         }})
     .then(arrayOfInstances => {
-        if (arrayOfInstances === []) {
+        if (arrayOfInstances.length === 0) {
             return []
         }
         else {
@@ -115,18 +128,19 @@ Telemetry.retrieveTimestampsByStartEnd = function(reqStart, reqEnd) {
     .catch(err => console.error("DB error:", err))
 }
 
-Telemetry.retrieveLastTimestamp = function() {
+MainTelemetry.retrieveLastTimestamp = function() {
     return this.max('timestamp')
     .catch(err => console.error("DB error:", err))
 }
 
-Telemetry.retrieveSingleValue = function(reqSource, reqSingle) {
+MainTelemetry.retrieveSingleValue = function(reqSource, reqSingle) {
+    //images only
     let timestamp = +reqSingle;
     return this.findOne({
         attributes: ['timestamp', reqSource] ,
         where: {
             'timestamp': {
-                [Sequelize.Op.eq]: reqSingle
+                [Sequelize.Op.eq]: timestamp
             }
         }})
         .then(instance => {
@@ -148,4 +162,4 @@ Telemetry.retrieveSingleValue = function(reqSource, reqSingle) {
         .catch(err => console.error("DB error:", err))
 }
 
-module.exports = Telemetry
+module.exports = MainTelemetry

@@ -1,0 +1,30 @@
+@import "shared.scss";
+
+.overlay {
+  box-sizing: border-box;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: $invalidInputColor;
+  z-index: 600;
+  display: flex;
+  padding: 0px 0px 50vh 0px;
+  justify-content: center;
+  align-items: center;
+}
+
+.popUp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 1rem 1.5rem 1rem;
+  width: fit-content;
+  height: fit-content;
+  background-color: white;
+  border: 2px solid $red;
+}
+
+.message {
+  color: $red;
+  font-size: 1.2rem;
+}

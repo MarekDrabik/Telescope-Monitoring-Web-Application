@@ -1,27 +1,30 @@
-# BalloonMonitoring (Angular 8)
+# Telescope Monitoring
 
-<img align="right" src="/.doc/balonMonitoring.png" width="500">
-Táto webová aplikácia slúži na zobrazovanie číselnej a obrázkovej telemetrie v reálnom čase.
-Aplikáciu vytváram na žiadosť môjho bratranca ktorý pracuje na projekte spoločnosti NASA.
-Projektom je teleskop, ktorý bude uskutočňovať merania a pozorovania na okraji zemskej atmosféry. 
+<img align="right" src="/.doc/telescopeMonitoring2.png" width="500"></img>
+Web browser application providing a user-friendly interface to monitor various kind of telemetry data produced by a remote device.<br>
+I made this application on demand, as a monitoring platform for a telescope in a NASA project (see below). <br>
+Unfortunately, this mission was not executed and so this application wasn't used in real scenario. <br>
 
-V tomto projekte má moja aplikácia prevziať hlavnú úlohu pri zobrazovaní telemetrie a vzdialenom nastavovaní zariadenia.
+Please click here for [full video presentation of the application (13 minutes)](https://youtu.be/4Kk7DvttR24).
 
-Aplikácia je v momentálne stave už použiteľná a jej základné funkcie sú k dispozícii:
-* zobrazovanie číselnej telemetrie v interaktívnom grafe alebo v tabuľke
-* zobrazovanie obrázkovej telemetrie
-* nastaviteľný časový rozsah zobrazených dát a ľubovoľný náhľad do histórie
-* zasielanie príkazov na meracie zariadenie
+## About the NASA project
+**web:** https://techport.nasa.gov/view/94313 <br>
+**contact person:** Viliam Klein, viliam.klein@gmail.com, +1 303-827-6422 <br>
 
-Aplikácia je flexibilná a nastaviteľná podľa vkusu užívateľa. Všetky okná je preto možné ľubovoľne presúvať a meniť ich veľkosť. 
-Je možné vytvoriť viacero okien, ktoré zobrazia jeden alebo viacero zdrojov telemetrie. Posledné nastavenia užívateľa sú uložené 
-vo webovom prehliadači, a preto je možné aplikáciu vypnúť bez straty nastavenia.
+## Publicly available<br>
+Application is available online for anybody who would like to try it out. If you are interested, please visit this page: <https://87.197.183.237:5444>. <br>
+Your browser might alert you about untrusted connection certificate, please confirm an exception for this certificate to proceed. <br>
+To start the application, please log in using the following credentials:<br>
+```
+visitor
+1:OgaI82LKvjsd82/sk2F
+```
+## Tools used
+* [Angular 8](https://angular.io/), [Node.js](https://nodejs.org), [MySQL](https://www.mysql.com/)
+* maps were created using [Leaflet](https://leafletjs.com/) and [OpenStreetMap](https://www.openstreetmap.org)
+* graphs were created using [Dygraphs](http://dygraphs.com/)
 
-## Možnosť vyskúšať
-
-Aplikácia je pre účely prezentácie k dispozícii na vyskúšanie na adrese: https://87.197.183.237:5444 <br>
-Pri prvom načítaní stránky sa môže zobraziť bezpečnostné upozornenie, to je treba odsúhlasiť potvrdiť výnimku na certifikát. <br>
-Dáta zobrazované v tejto verejnej verzii sú generované umelo na serveri, a teda neide o reálne merania. <br>
-Dáta sú ale ďalej spracované štandardne, to znamená uložené do databázy, odkiaľ sú poskytované užívateľovi 
-podľa ním zadaných časových intervalov v aplikácii.
-
+## This code repository
+Full source code of this project can be found in this repository.<br>
+* [app-developement](https://github.com/MarekDrabik/TelescopeMonitoring/tree/master/app-developement) - Typescript source code of Angular web application before compilation
+* [server-public](https://github.com/MarekDrabik/TelescopeMonitoring/tree/master/server-public/app) - public Node.js web server, as well as data server providing communication between client and remote device

@@ -1,0 +1,136 @@
+@import "shared.scss";
+
+
+
+:host {
+  overflow-y: hidden !important;
+  overflow-x: auto;
+}
+
+.tablePhrame {
+  width: 100%;
+  height: 100%;
+  display: flex; //for control-panel
+  flex-direction: column;
+  justify-content: stretch;
+}
+
+table {
+  border-collapse: collapse;
+  font-family: monospace;
+  bottom: 20px;
+  min-width: 100%;
+  text-align: left;
+}
+
+tr {
+  height: 16px;
+}
+
+td {
+  border: 1px solid white;
+  border-bottom: none;
+  border-right: $tableBorder;
+  border-left: $tableBorder;
+  min-width: fit-content;
+  white-space: nowrap;
+  padding: 0px 6px;
+}
+td.mozzilaBrowserStyling {
+  border-top: none;
+  border-bottom: 1px solid white;
+}
+
+td.date,
+td.time {
+  border-left: $tableBorderDatetime;
+  border-right: none;
+  color: $dateTimeColor;
+  width: 1px; //smaller than min-width will apply min-width
+
+  > div {
+    width: fit-content;
+  }
+}
+
+tr.telemetry:hover {
+  background-color: $dirtyColor !important;
+  font-weight: bold;
+
+  td {
+    border-left-color: white;
+    border-right-color: white;
+  }
+  :first-child {
+    border-left-color: $phramesColor;
+  }
+  :last-child {
+    border-right-color: $phramesColor;
+  }
+}
+
+tr.telemetry:nth-child(even) {
+  background-color: $tableLinesColor;
+}
+
+// general layout:
+.tableContainer--overflow {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  overflow-y: scroll;
+  overflow-x: auto;
+
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-start;
+}
+.tableContainer--overflow.mozzilaBrowserStyling {
+  flex-direction: column;
+}
+
+.sourceNames {
+  //dummy and footer
+
+  td {
+    position: sticky;
+    bottom: 0;
+    height: 11px;
+    border-left: $tableBorder;
+    border-right: $tableBorder;
+    // font-weight: bolder;
+    color: $phramesColorDarkened;
+    background-color: $phramesColorLightened;
+  }
+  td.mozzilaBrowserStyling {
+    // position: st;
+    top: 0;
+    bottom: unset;
+    .headerCellContent {
+      line-height: 10px;
+    }
+  }
+
+  .headerCellContent {
+    width: 100%;
+    height: 100%;
+  }
+
+
+  td.date,
+  td.time {
+    border-left: $tableBorderDatetime;
+    border-right: none;
+    background-color: $appletPhrameColor;
+  }
+}
+
+.noSources {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(238, 187, 187);
+  text-align: center;
+}
+
+

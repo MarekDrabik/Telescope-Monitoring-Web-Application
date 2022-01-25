@@ -1,7 +1,5 @@
-import { Component, OnInit, ElementRef, Renderer2, ViewEncapsulation } from '@angular/core';
-import { AppLayoutService } from './services/app-layout.service';
-import { HttpService } from './services/http.service';
-import { TelemetrySettings } from './types/custom.types';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { HttpService } from './shared/services/http.service';
 
 @Component({
   selector: 'app-root',

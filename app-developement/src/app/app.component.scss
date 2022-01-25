@@ -1,4 +1,4 @@
-@import './shared/shared.scss';
+@import "shared.scss";
 
 * {
   user-select:none;
@@ -7,7 +7,7 @@
 html {
   font-family: Sans;
   font-size: 12px; //delegates to all components, they can relatively style to this using rem
-  font-weight: 400; 
+  font-weight: 400;
 }
 
 button {

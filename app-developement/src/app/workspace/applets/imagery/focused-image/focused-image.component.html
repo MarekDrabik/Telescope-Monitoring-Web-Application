@@ -1,0 +1,18 @@
+<div class="container" [ngClass]="{ userSelected: userSelected }">
+  <!-- mozzila: -->
+  <div
+    *ngIf="currentBrowserService.browser === 'mozzila'"
+    class="image"
+    appSetImageUrl
+    [focusedImageUrl]="imageUrl"
+  ></div>
+  <!-- chrome: -->
+  <img
+    *ngIf="currentBrowserService.browser !== 'mozzila'"
+    [src]="imageUrl"
+    [title]="timestamp"
+  />
+
+  <div class="timestamp">{{ timestamp }}</div>
+  <button *ngIf="userSelected" (click)="onResume($event)"></button>
+</div>

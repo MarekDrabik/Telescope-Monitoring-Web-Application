@@ -1,7 +1,7 @@
 # Telescope Monitoring
 
-<img align="right" src="/.doc/telescopeMonitoring2.png" width="500"></img>
-Web application providing a user-friendly interface to monitor various kind of telemetry data produced by a remote device.<br>
+<img align="right" src="/.doc/telescopeMonitoring2.png" width="450"></img>
+Web browser application providing a user-friendly interface to monitor various kind of telemetry data produced by a remote device.<br>
 I made this application on demand, as a monitoring platform for a telescope in a NASA project (see below). <br>
 Unfortunately, this mission was not executed and so this application wasn't used in real scenario. <br>
 
